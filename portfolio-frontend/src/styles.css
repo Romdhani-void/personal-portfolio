@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Assure que h-screen fonctionne partout */
+html, body { height: 100%; }
+
+/* Le canvas injecté par Vanta doit rester derrière tout */
+.vanta-canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}

@@ -1,0 +1,54 @@
+/* Base colors via CSS variables */
+nav {
+  --nav-fg: #0f172a;       /* slate-900 for light sections */
+  --nav-accent: #1E40AF;   /* blue-800 for underline/hover in light */
+  color: var(--nav-fg);
+  backdrop-filter: saturate(120%) blur(8px);
+}
+
+/* Invert when overlapping dark sections */
+nav.nav--invert {
+  --nav-fg: #ffffff;
+  --nav-accent: #BFDBFE;   /* blue-200 for contrast on dark */
+  color: var(--nav-fg);
+}
+
+/* Make link colors follow the variables, overriding any Tailwind text classes */
+nav a[routerLink] {
+  color: var(--nav-fg) !important;
+}
+nav a[routerLink]:hover {
+  color: var(--nav-accent) !important;
+}
+
+/* Active link uses accent shade */
+.router-link-active { color: var(--nav-accent) !important; }
+
+/* Keep links above the underline */
+a[routerLink] { position: relative; z-index: 1; }
+
+/* Traveling underline (transform-only) uses --nav-accent */
+.underline-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 1px; /* base width; real width via scaleX */
+  background-color: var(--nav-accent);
+  border-radius: 9999px;
+
+  transform-origin: 0 50%;
+  transform: translate3d(0,0,0) scaleX(1);
+  will-change: transform;
+  transition: none;
+  pointer-events: none;
+  z-index: 0;
+}
+.underline-bar.ready {
+  transition: transform 1200ms cubic-bezier(.25, 1, .5, 1);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .underline-bar.ready { transition: none; }
+}

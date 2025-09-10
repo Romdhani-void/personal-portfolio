@@ -1,0 +1,47 @@
+#vanta-bg {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #ffffff; /* white fallback */
+}
+
+.vanta-canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+.content-above {
+  position: relative;
+  z-index: 10; /* Text stays above birds */
+}
+
+/* Tiny floating accent */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); opacity: 0.9; }
+  50%      { transform: translateY(-4px); opacity: 1; }
+}
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+/* Continuous slow bounce for title */
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+.animate-bounce-slow {
+  animation: bounce-slow 4s ease-in-out infinite;
+}
+
+/* Blinking typing cursor */
+.typing-cursor {
+  display: inline-block;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  from, to { opacity: 1 }
+  50% { opacity: 0 }
+}
