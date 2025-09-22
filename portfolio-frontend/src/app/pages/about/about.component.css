@@ -1,0 +1,5 @@
+:host { display: block; }
+
+@media (prefers-reduced-motion: reduce) {
+  .transition, .transition-transform { transition: none !important; }
+}

@@ -1,26 +1,27 @@
 <app-navbar></app-navbar>
 
-<section class="max-w-6xl mx-auto px-6 pt-24 pb-16">
+<section class="max-w-6xl mx-auto px-6 pt-24 pb-16" aria-labelledby="work-heading">
   <!-- Header -->
   <div class="text-center">
     <span class="mb-6 inline-flex items-center rounded-full px-4 py-1 text-sm font-semibold bg-slate-700 text-white">
       My Work
     </span>
-    <h2 class="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900">
+    <h2 id="work-heading" class="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900">
       Featured Projects
     </h2>
     <p class="mt-3 text-gray-600">Real deliverables. Clear scope. Measurable outcomes.</p>
   </div>
 
   <!-- Filters -->
-  <div class="mt-8 flex flex-wrap justify-center gap-2">
+  <div class="mt-8 flex flex-wrap justify-center gap-2" role="toolbar" aria-label="Project filters">
     <button
       *ngFor="let f of filters"
       type="button"
       (click)="setActive(f.key)"
       class="px-4 py-2 rounded-full text-sm font-semibold transition
-             focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"
+             focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 focus-visible:ring-offset-2"
       [attr.aria-pressed]="active === f.key"
+      [attr.aria-label]="'Filter: ' + f.label"
       [ngClass]="active === f.key
         ? 'bg-rose-600 text-white border border-rose-600 hover:bg-rose-600 hover:text-white'
         : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 hover:text-gray-900'">
@@ -30,117 +31,122 @@
 
   <!-- Cards block -->
   <div [ngClass]="active === 'all' ? 'mt-10 min-h-55vh flex items-center justify-center' : 'mt-6'">
-    <div class="flex flex-wrap justify-center gap-5">
-      <article
+    <ul class="flex flex-wrap justify-center gap-5" role="list" aria-label="Projects">
+      <li
         *ngFor="let p of filtered; trackBy: trackById"
-        class="w-full sm:w-72 md:w-80 xl:w-80
-               group relative overflow-visible rounded-2xl p-0.5
-               bg-gradient-to-br from-rose-200 via-fuchsia-200 to-sky-200
-               hover:from-rose-300 hover:via-fuchsia-300 hover:to-sky-300 transition"
+        class="w-full sm:w-72 md:w-80 xl:w-80"
+        role="listitem"
       >
-        <!-- Sticker (sysadmin only in All) -->
-        <div
-          *ngIf="active === 'all' && isSysadmin(p)"
-          class="pointer-events-none absolute -top-2 left-1/2 transform -translate-x-1/2 z-20"
+        <article
+          class="group relative overflow-visible rounded-2xl p-0.5
+                 bg-gradient-to-br from-rose-200 via-fuchsia-200 to-sky-200
+                 hover:from-rose-300 hover:via-fuchsia-300 hover:to-sky-300 transition"
         >
-          <span
-            class="inline-block transform -rotate-6 group-hover:-rotate-2 transition-transform
-                   text-center rounded-full bg-rose-600 text-white text-[10px] leading-none
-                   font-bold px-3 py-1 shadow-md ring-2 ring-white"
+          <!-- Sticker (DevOps in All with video) -->
+          <div
+            *ngIf="active === 'all' && p.roles?.includes('devops') && p.videoLink"
+            class="pointer-events-none absolute -top-2 left-1/2 transform -translate-x-1/2 z-20"
+            aria-hidden="true"
           >
-            Video available
-          </span>
-        </div>
-
-        <!-- Minimal automation corner (n8n) -->
-        <div *ngIf="p.n8n" class="auto-corner" aria-label="Automated with n8n" title="Automated with n8n">
-          <svg viewBox="0 0 24 24" class="auto-icon" aria-hidden="true">
-            <circle cx="6" cy="6" r="2"></circle>
-            <circle cx="18" cy="6" r="2"></circle>
-            <circle cx="18" cy="18" r="2"></circle>
-            <path d="M8 6h8M18 8v8M8 6c0 6 6 6 10 10" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>
-        </div>
-
-        <!-- Inner surface -->
-        <div class="relative z-0 rounded-2xl bg-white bg-opacity-90 p-4 h-full shadow-sm hover:shadow-md transition">
-          <!-- Header row -->
-          <div class="flex items-start justify-between gap-3">
-            <h3 class="text-[15px] md:text-base font-extrabold text-gray-900 leading-snug clamp-2">
-              {{ p.title }}
-            </h3>
-
-            <span *ngIf="p.duration"
-                  class="shrink-0 inline-flex items-center rounded-full border border-rose-200 bg-rose-50 px-2 py-0.5 text-[10px] font-semibold text-rose-700">
-              {{ p.duration }}
-            </span>
-          </div>
-
-          <p class="mt-1 text-[13px] text-gray-700 clamp-3">
-            {{ p.oneLiner }}
-          </p>
-
-          <!-- Metrics -->
-          <ng-container *ngIf="p.metrics as metrics">
-            <div class="mt-3 flex flex-wrap items-center gap-1.5">
-              <span
-                *ngFor="let m of metrics | slice:0:2"
-                class="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-2 py-0.5 text-[10px] font-medium text-gray-700"
-              >
-                {{ m }}
-              </span>
-              <span *ngIf="metrics.length > 2" class="text-[10px] text-gray-500">
-                +{{ metrics.length - 2 }}
-              </span>
-            </div>
-          </ng-container>
-
-          <!-- Tags -->
-          <div class="mt-3 flex flex-wrap gap-1.5">
             <span
-              *ngFor="let t of p.tags"
-              class="px-2 py-0.5 rounded-full text-[10px] bg-gray-100 text-gray-700 border border-gray-200"
+              class="inline-block transform -rotate-6 group-hover:-rotate-2 transition-transform
+                     text-center rounded-full bg-rose-600 text-white text-[10px] leading-none
+                     font-bold px-3 py-1 shadow-md ring-2 ring-white"
             >
-              {{ t }}
+              Video available
             </span>
           </div>
 
-          <!-- Footer -->
-          <div class="mt-3 flex flex-wrap items-center justify-between gap-2 text-[11px] text-gray-500">
-            <span *ngIf="p.scope" class="inline-flex items-center gap-1">
-              <span class="inline-block h-1.5 w-1.5 rounded-full bg-gray-300"></span>
-              {{ p.scope }}
-            </span>
+          <!-- Minimal automation corner (n8n) -->
+          <div *ngIf="p.n8n" class="auto-corner" aria-label="Automated with n8n" title="Automated with n8n">
+            <svg viewBox="0 0 24 24" class="auto-icon" aria-hidden="true">
+              <circle cx="6" cy="6" r="2"></circle>
+              <circle cx="18" cy="6" r="2"></circle>
+              <circle cx="18" cy="18" r="2"></circle>
+              <path d="M8 6h8M18 8v8M8 6c0 6 6 6 10 10" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
 
-            <div class="ml-auto">
-              <!-- ONLY Watch Video if videoLink exists -->
-              <a
-                *ngIf="p.videoLink; else detailsBtn"
-                [href]="p.videoLink"
-                target="_blank" rel="noopener noreferrer"
-                class="inline-flex items-center gap-1 rounded-full border border-rose-600 bg-rose-600
-                       px-3 py-1 text-[11px] font-semibold text-white hover:bg-rose-700"
-              >
-                Watch Video
-              </a>
+          <!-- Inner surface -->
+          <div class="relative z-0 rounded-2xl bg-white bg-opacity-90 p-4 h-full shadow-sm hover:shadow-md transition">
+            <!-- Header row -->
+            <div class="flex flex-col items-center justify-center gap-2">
+              <h3 class="text-[15px] md:text-base font-extrabold text-gray-900 leading-snug clamp-2 text-center w-full">
+                {{ p.title }}
+              </h3>
 
-              <!-- Otherwise View Details -->
-              <ng-template #detailsBtn>
-                <a
-                  *ngIf="getPrimaryLink(p) as href"
-                  [href]="href"
-                  [attr.target]="p.isExternal ? '_blank' : null"
-                  [attr.rel]="p.isExternal ? 'noopener noreferrer' : null"
-                  class="inline-flex items-center gap-1 rounded-full border border-gray-300 bg-white
-                         px-3 py-1 text-[11px] font-semibold text-gray-700 hover:bg-gray-50"
+              <span *ngIf="p.duration"
+                    class="shrink-0 inline-flex items-center rounded-full border border-rose-200 bg-rose-50 px-2 py-0.5 text-[10px] font-semibold text-rose-700">
+                {{ p.duration }}
+              </span>
+            </div>
+
+            <p class="mt-2 text-[13px] text-gray-700 clamp-3 text-center">
+              {{ p.oneLiner }}
+            </p>
+
+            <!-- Metrics -->
+            <ng-container *ngIf="p.metrics as metrics">
+              <div class="mt-3 flex flex-wrap justify-center items-center gap-1.5" aria-label="Key metrics">
+                <span
+                  *ngFor="let m of metrics | slice:0:2"
+                  class="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-2 py-0.5 text-[10px] font-medium text-gray-700"
                 >
-                  View Details
+                  {{ m }}
+                </span>
+                <span *ngIf="metrics.length > 2" class="text-[10px] text-gray-500" aria-label="More metrics">
+                  +{{ metrics.length - 2 }}
+                </span>
+              </div>
+            </ng-container>
+
+            <!-- Tags -->
+            <div class="mt-3 flex flex-wrap justify-center gap-1.5" aria-label="Tags">
+              <span
+                *ngFor="let t of p.tags"
+                class="px-2 py-0.5 rounded-full text-[10px] bg-gray-100 text-gray-700 border border-gray-200"
+              >
+                {{ t }}
+              </span>
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-3 flex flex-wrap items-center justify-between gap-2 text-[11px] text-gray-500">
+              <span *ngIf="p.scope" class="inline-flex items-center gap-1">
+                <span class="inline-block h-1.5 w-1.5 rounded-full bg-gray-300" aria-hidden="true"></span>
+                {{ p.scope }}
+              </span>
+
+              <div class="ml-auto">
+                <!-- Watch Video if present -->
+                <a
+                  *ngIf="p.videoLink; else detailsBtn"
+                  [href]="p.videoLink"
+                  target="_blank" rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 rounded-full border border-rose-600 bg-rose-600
+                         px-3 py-1 text-[11px] font-semibold text-white hover:bg-rose-700"
+                >
+                  Watch Video
                 </a>
-              </ng-template>
+
+                <!-- Otherwise View Details -->
+                <ng-template #detailsBtn>
+                  <a
+                    *ngIf="getPrimaryLink(p) as href"
+                    [href]="href"
+                    [attr.target]="p.isExternal ? '_blank' : null"
+                    [attr.rel]="p.isExternal ? 'noopener noreferrer' : null"
+                    class="inline-flex items-center gap-1 rounded-full border border-gray-300 bg-white
+                           px-3 py-1 text-[11px] font-semibold text-gray-700 hover:bg-gray-50"
+                  >
+                    View Details
+                  </a>
+                </ng-template>
+              </div>
             </div>
           </div>
-        </div>
-      </article>
-    </div>
+        </article>
+      </li>
+    </ul>
   </div>
 </section>

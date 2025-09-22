@@ -1,0 +1,21 @@
+.distance-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 9999px;
+  border: 1px solid rgba(148, 163, 184, 0.35); /* slate-400/35 */
+  background: rgba(255, 255, 255, 0.7);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  padding: 6px 10px;
+  font-size: 12px;
+  color: #334155; /* slate-700 */
+}
+:host-context(.dark) .distance-badge {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #e2e8f0; /* slate-200 */
+}
+.icon { width: 16px; height: 16px; opacity: 0.85; }
+.text { line-height: 1; }
+.muted { opacity: 0.6; }

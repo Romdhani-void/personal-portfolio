@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-head">
+    <h3>GitHub Activity</h3>
+    <a [href]="'https://github.com/' + username"
+       target="_blank" rel="noopener noreferrer"
+       class="handle" [innerText]="'@' + username"></a>
+  </div>
+
+  <div *ngIf="loaded(); else loading" class="stats">
+    <div class="stat">
+      <div class="num">{{ stats().public_repos }}</div>
+      <div class="lbl">Repos</div>
+    </div>
+    <div class="stat">
+      <div class="num">{{ stats().followers }}</div>
+      <div class="lbl">Followers</div>
+    </div>
+    <div class="stat">
+      <div class="num">{{ accountAgeYears() }}</div>
+      <div class="lbl">Years</div>
+    </div>
+  </div>
+  <ng-template #loading>
+    <p class="loading">Loading GitHub…</p>
+  </ng-template>
+
+  <!-- Lightweight contribution chart (B/W via CSS filter) -->
+  <div class="chart-wrap">
+    <img
+      [src]="'https://ghchart.rshah.org/' + username"
+      alt="GitHub contributions for {{ username }}"
+      loading="lazy"
+      class="chart"
+    />
+  </div>
+
+  <p class="hint">(Open profile for full details.)</p>
+</div>

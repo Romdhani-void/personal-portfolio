@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 
-type Role = 'all' | 'sysadmin' | 'fullstack' | 'devsecops' | 'api';
+type Role = 'all' | 'fullstack' | 'devops' | 'scripts';
 
 interface Project {
   id: string;
@@ -14,12 +14,11 @@ interface Project {
   metrics?: string[];
   scope?: string;
   duration?: string;
-  link?: string;         // preferred destination (case study / demo / project page)
-  isExternal?: boolean;  // true to open in a new tab
-  blogLink?: string;     // optional fallback
-  n8n?: boolean;         // renders minimal n8n corner ribbon
-  n8nLink?: string;      // optional doc link (not used in UI here)
-  videoLink?: string;    // if present => only "Watch Video" is shown
+  link?: string;
+  isExternal?: boolean;
+  blogLink?: string;
+  videoLink?: string;
+  n8n?: boolean; // optional automation badge
 }
 
 @Component({
@@ -32,125 +31,102 @@ interface Project {
 export class WorkComponent {
   readonly filters = [
     { key: 'all' as Role,       label: 'All' },
-    { key: 'sysadmin' as Role,  label: 'System Administration' },
-    { key: 'fullstack' as Role, label: 'Web' },
-    { key: 'devsecops' as Role, label: 'DevSecOps' },
-    { key: 'api' as Role,       label: 'API' },
+    { key: 'fullstack' as Role, label: 'Web (Fullstack)' },
+    { key: 'devops' as Role,    label: 'DevOps' },
+    { key: 'scripts' as Role,   label: 'PowerShell Quick Fix' },
   ];
 
   active: Role = 'all';
 
   readonly projects: Project[] = [
-    /** ===================== System Administration (3) ===================== */
+    /** ===================== Fullstack ===================== */
     {
-      id: 'sa1',
-      title: 'NetCore Enterprise',
+      id: 'fs1',
+      title: 'SAFARICA – Tour Booking',
       oneLiner:
-        'Hybrid AD + Entra ID with Intune compliance, BitLocker escrow, and automated app baselines for enterprise endpoints.',
-      roles: ['sysadmin', 'api', 'devsecops'],
-      tags: ['Entra ID', 'AD Connect', 'Intune', 'BitLocker', 'Win32 Apps'],
-      metrics: ['Compliance 98%', 'Rollout time ↓ 55%'],
-      scope: 'Identity, device, and app lifecycle',
-      duration: '6 weeks',
-      link: '/case-studies/netcore-enterprise',
-      blogLink: '/blogs/netcore-enterprise',
-      videoLink: 'https://your-video-url.example/netcore', // replace with real video
-    },
-    {
-      id: 'sa2',
-      title: 'AuthSphere AD',
-      oneLiner:
-        'Modernized on-prem AD: tiered admin model, fine-grained GPO, LAPS, and privileged access workstations.',
-      roles: ['sysadmin'],
-      tags: ['Active Directory', 'GPO', 'LAPS', 'PAW', 'RBAC'],
-      metrics: ['P1 auth incidents: 0', 'Lateral movement risk ↓ 70%'],
-      scope: 'Directory services hardening',
-      duration: '4 weeks',
-      link: '/case-studies/authsphere-ad',
-      blogLink: '/blogs/authsphere-ad',
-      videoLink: 'https://your-video-url.example/authsphere',
-    },
-    {
-      id: 'sa3',
-      title: 'CloudLink Manager',
-      oneLiner:
-        'Site-to-site VPN / vWAN design, Azure Firewall policies, and hardened landing zones with BCDR playbooks.',
-      roles: ['sysadmin', 'devsecops'],
-      tags: ['Azure', 'vWAN/VPN', 'Azure Firewall', 'BCDR', 'Landing Zone'],
-      metrics: ['MTTR ↓ 31%', 'RPO ≤ 15 min'],
-      scope: 'Network + cloud security architecture',
-      duration: '5 weeks',
-      link: '/case-studies/cloudlink-manager',
-      blogLink: '/blogs/cloudlink-manager',
-      videoLink: 'https://your-video-url.example/cloudlink',
-    },
-
-    /** ===================== Web (2 with n8n) ===================== */
-    {
-      id: 'w1',
-      title: 'Safarica – Travel Agency (MEAN + Stripe)',
-      oneLiner:
-        'End-to-end booking with admin auth, catalog, cart, Stripe payments/refunds, and ops workflows automated via n8n.',
+        'End-to-end booking with catalog, cart, Stripe payments/refunds, and automated emails after payment.',
       roles: ['fullstack'],
-      tags: ['Angular', 'Node', 'Express', 'MongoDB', 'Stripe', 'JWT', 'Tailwind', 'n8n'],
-      metrics: ['Checkout success +22%', 'Chargebacks ↓ 40%'],
+      tags: ['Angular', 'Node', 'Express', 'MongoDB', 'Stripe', 'Automation'],
       scope: 'Public app + admin panel',
       duration: '8 weeks',
       link: '/projects/safarica',
       n8n: true,
-      n8nLink: '/automation/safarica-n8n',
     },
     {
-      id: 'w2',
-      title: 'SLA Reliability Dashboard',
+      id: 'fs2',
+      title: 'BarberShop',
       oneLiner:
-        'SLA-focused dashboard (Azure/M365/on-prem probes) with enrichment, deduplication, and alerting orchestrated by n8n.',
-      roles: ['fullstack', 'api'],
-      tags: ['Angular', 'Node', 'Graph API', 'Azure Monitor', 'SLO/SLA', 'Teams Webhooks', 'n8n'],
-      metrics: ['TTD ↓ 41%', 'False alarms ↓ 28%'],
-      scope: 'SPA + API',
-      duration: '3 weeks',
-      link: '/projects/sla-dashboard',
-      n8n: true,
-      n8nLink: '/automation/sla-n8n',
+        'Appointments, staff management, and automated SMS confirmations.',
+      roles: ['fullstack'],
+      tags: ['Angular', 'Node', 'Express', 'MongoDB', 'Twilio'],
+      scope: 'Booking + management platform',
+      duration: '6 weeks',
+      link: '/projects/barbershop',
     },
     {
-      id: 'w3',
-      title: 'Secure File Transfer Portal',
+      id: 'fs3',
+      title: 'NutriTrack - Calories Counter',
       oneLiner:
-        'Angular + NestJS with expiring links, AV scanning, size quotas, and full audit trail for external sharing.',
-      roles: ['fullstack', 'devsecops'],
-      tags: ['Angular', 'NestJS', 'PostgreSQL', 'S3-compatible', 'ClamAV', 'OWASP ASVS'],
-      metrics: ['Upload success +18%', 'Incidents: 0'],
-      scope: 'Web app + worker',
+        'Nutrition & exercise tracker with AI-based calorie estimation from food inputs.',
+      roles: ['fullstack'],
+      tags: ['Angular', 'Node', 'Express', 'MongoDB', 'AI'],
+      scope: 'Health & fitness app',
       duration: '5 weeks',
-      link: '/projects/secure-file-transfer',
+      link: '/projects/calories-counter',
     },
 
-    /** ===================== DevSecOps (reduced) ===================== */
+    /** ===================== DevOps (one per app) ===================== */
     {
-      id: 'd1',
-      title: 'Blue-Green CI/CD for Node Services',
-      oneLiner: 'Slot-based deploys on Azure with smoke tests and one-click rollback.',
-      roles: ['devsecops'],
-      tags: ['Azure App Service', 'Slots', 'Docker', 'GitHub Actions', 'Playwright'],
-      metrics: ['Zero downtime', 'Deploy time ↓ 70%'],
-      scope: '4 microservices',
-      duration: '3 weeks',
-      link: '/projects/blue-green-cicd',
-    },
-
-    /** ===================== API (unchanged) ===================== */
-    {
-      id: 'a1',
-      title: 'Intune Deployment Orchestrator API',
-      oneLiner: 'REST API to stage Win32 apps, sync devices, and trigger policy assignments.',
-      roles: ['api', 'sysadmin', 'devsecops'],
-      tags: ['Intune Graph', 'Node', 'Express', 'Entra App', 'MSAL'],
-      metrics: ['Rollout time ↓ 55%', 'Human error ↓ 80%'],
-      scope: 'Service + CLI',
+      id: 'do1',
+      title: 'Safarica – DevOps Hosting',
+      oneLiner:
+        'Containerized deployment with CI/CD and monitoring. Video walkthrough included.',
+      roles: ['devops'],
+      tags: ['Docker', 'Kubernetes', 'Azure', 'CI/CD'],
+      metrics: ['Zero downtime'],
+      scope: 'App hosting',
       duration: '2 weeks',
-      link: '/projects/intune-orchestrator-api',
+      link: '/projects/devops-safarica',
+      videoLink: 'https://your-video-url.example/devops-safarica',
+    },
+    {
+      id: 'do2',
+      title: 'BarberShop – DevOps Hosting',
+      oneLiner:
+        'Containerized deployment with CI/CD and monitoring. Video walkthrough included.',
+      roles: ['devops'],
+      tags: ['Docker', 'Kubernetes', 'Azure', 'CI/CD'],
+      metrics: ['Scalable infra'],
+      scope: 'App hosting',
+      duration: '2 weeks',
+      link: '/projects/devops-barbershop',
+      videoLink: 'https://your-video-url.example/devops-barbershop',
+    },
+    {
+      id: 'do3',
+      title: 'Calories Counter – DevOps Hosting',
+      oneLiner:
+        'Containerized deployment with CI/CD and monitoring. Video walkthrough included.',
+      roles: ['devops'],
+      tags: ['Docker', 'Kubernetes', 'Azure', 'CI/CD'],
+      metrics: ['Reliable builds'],
+      scope: 'App hosting',
+      duration: '2 weeks',
+      link: '/projects/devops-calories',
+      videoLink: 'https://your-video-url.example/devops-calories',
+    },
+
+    /** ===================== PowerShell Quick Fix ===================== */
+    {
+      id: 'ps1',
+      title: 'Armoury Crate Repair Script',
+      oneLiner:
+        'PowerShell script to fix common Armoury Crate issues on ASUS ROG PCs.',
+      roles: ['scripts'],
+      tags: ['PowerShell', 'Windows', 'ASUS ROG', 'Troubleshooting'],
+      scope: 'Quick fix script',
+      duration: '1 week',
+      link: '/projects/armoury-crate-fix',
     },
   ];
 
@@ -166,11 +142,10 @@ export class WorkComponent {
 
   trackById = (_: number, p: Project) => p.id;
 
-  isSysadmin(p: Project): boolean {
-    return p.roles.includes('sysadmin');
+  isscripts(p: Project): boolean {
+    return p.roles.includes('scripts');
   }
 
-  /** Prefer p.link, fallback to blogLink if provided */
   getPrimaryLink(p: Project): string | null {
     return p.link || p.blogLink || null;
   }

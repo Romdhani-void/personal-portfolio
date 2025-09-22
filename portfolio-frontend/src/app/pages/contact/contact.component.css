@@ -1,0 +1,6 @@
+:host { display: block; }
+input, textarea { caret-color: rgb(244 63 94); /* rose-600 */ }
+
+@media (prefers-reduced-motion: reduce) {
+  .transition, .transition-transform { transition: none !important; }
+}
