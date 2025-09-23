@@ -1,23 +1,22 @@
-<div class="distance-badge">
-  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-    <path d="M12 21s7-5.33 7-10a7 7 0 1 0-14 0c0 4.67 7 10 7 10z"></path>
-    <circle cx="12" cy="11" r="2.5"></circle>
-  </svg>
+<ng-container *ngIf="!hidden()">
+  <div class="card">
+    <div class="card-head">
+      <div class="head-left">
+        <span class="dot" aria-hidden="true"></span>
+        <h3>Route to {{ cityLabel }}</h3>
+      </div>
+      <p class="greet" *ngIf="greeting()">{{ greeting() }}</p>
+    </div>
 
-  <ng-container *ngIf="!error(); else errTpl">
-    <ng-container *ngIf="km() !== null; else askTpl">
-      <span class="text">
-        You’re ~{{ km() | number:'1.0-0' }} km from me
-        <span class="muted">({{ cityLabel }})</span>
-      </span>
-    </ng-container>
-  </ng-container>
+    <p class="distance" *ngIf="distanceKm() !== null">
+      You’re ~{{ distanceKm() | number:'1.0-0' }} km from me
+    </p>
 
-  <ng-template #askTpl>
-    <span class="text">Share location to see distance <span class="muted">({{ cityLabel }})</span></span>
-  </ng-template>
-
-  <ng-template #errTpl>
-    <span class="text">{{ error() }}</span>
-  </ng-template>
-</div>
+    <div
+      id="distanceMap"
+      class="map"
+      role="img"
+      [attr.aria-label]="'Map showing route from your location to ' + cityLabel">
+    </div>
+  </div>
+</ng-container>
