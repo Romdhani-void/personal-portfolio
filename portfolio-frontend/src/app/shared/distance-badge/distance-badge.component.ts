@@ -1,5 +1,17 @@
-import { Component, Input, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  Component,
+  Input,
+  AfterViewInit,
+  OnDestroy,
+  signal,
+  computed,
+  inject,
+  PLATFORM_ID,
+} from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import * as L from 'leaflet';
+
+type LatLng = { lat: number; lng: number };
 
 @Component({
   selector: 'app-distance-badge',
@@ -8,50 +20,166 @@ import { CommonModule } from '@angular/common';
   templateUrl: './distance-badge.component.html',
   styleUrls: ['./distance-badge.component.css'],
 })
-export class DistanceBadgeComponent implements OnInit {
-  /** Your location (defaults to Szeged, HU). Change if needed. */
-  @Input() lat = 46.253;   // Szeged
+export class DistanceBadgeComponent implements AfterViewInit, OnDestroy {
+  @Input() lat = 46.253; // Szeged, HU
   @Input() lng = 20.141;
   @Input() cityLabel = 'Szeged, HU';
 
-  km = signal<number | null>(null);
-  error = signal<string | null>(null);
+  /** 'geo' | 'ip' | 'auto' (VPN-aware if 'ip' or fallback) */
+  @Input() locateBy: 'geo' | 'ip' | 'auto' = 'auto';
 
-  ngOnInit(): void {
-    if (!('geolocation' in navigator)) {
-      this.error.set('Geolocation not supported');
-      return;
-    }
+  private platformId = inject(PLATFORM_ID);
 
-    // Ask after first paint to keep UI snappy
-    queueMicrotask(() => {
+  hidden = signal(false);
+  loading = signal(true);
+  user = signal<LatLng | null>(null);
+  country = signal<string | null>(null);
+  distanceKm = signal<number | null>(null);
+
+  greeting = computed(() => {
+    const c = (this.country() || '').trim();
+    if (!c) return '';
+    return c.toLowerCase() === 'hungary'
+      ? 'Szia! seems we’re in same paprika country :D'
+      : `Hi there from ${c}`;
+  });
+
+  // Leaflet instances
+  private map: L.Map | null = null;
+  private userMarker: L.Marker | null = null;
+  private destMarker: L.Marker | null = null;
+  private path: L.Polyline | null = null;
+  private dashTimer: number | null = null;
+  private pinIcon: L.Icon | null = null;
+
+  async ngAfterViewInit(): Promise<void> {
+    if (!isPlatformBrowser(this.platformId)) { this.hide(); return; }
+
+    const ok = await this.resolveUserPosition();
+    if (!ok) { this.hide(); return; }
+
+    // Use explicit icon so we never see "Marker" fallback text
+    this.pinIcon = L.icon({
+      iconUrl: 'assets/leaflet/marker-icon.png',
+      iconRetinaUrl: 'assets/leaflet/marker-icon-2x.png',
+      shadowUrl: 'assets/leaflet/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [0, -28],
+      shadowSize: [41, 41],
+      className: 'dali-pin',
+    });
+
+    const you = this.user()!;
+    this.initMap(you, { lat: this.lat, lng: this.lng });
+    this.loading.set(false);
+  }
+
+  ngOnDestroy(): void {
+    if (this.dashTimer) window.clearInterval(this.dashTimer);
+    try { this.map?.remove(); } catch {}
+  }
+
+  // --- internals ---
+  private hide() { this.hidden.set(true); this.loading.set(false); }
+
+  private async resolveUserPosition(): Promise<boolean> {
+    const useIp = this.locateBy === 'ip';
+    const useGeo = this.locateBy === 'geo';
+    if (useIp) return this.resolveViaIp();
+    if (useGeo) return this.resolveViaGeo(true);
+    // auto
+    const ok = await this.resolveViaGeo(false);
+    return ok ? true : this.resolveViaIp();
+  }
+
+  private resolveViaGeo(hideOnError: boolean): Promise<boolean> {
+    if (!('geolocation' in navigator)) { if (hideOnError) this.hide(); return Promise.resolve(false); }
+    return new Promise<boolean>((resolve) => {
       navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          const d = this.haversine(
-            this.lat,
-            this.lng,
-            pos.coords.latitude,
-            pos.coords.longitude
-          );
-          this.km.set(d);
+        async (pos) => {
+          const you = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+          this.applyUserAndDistance(you);
+          // country (best-effort)
+          try {
+            const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${you.lat}&lon=${you.lng}&zoom=3&addressdetails=1`;
+            const r = await fetch(url, { headers: { Accept: 'application/json' } });
+            const data = await r.json().catch(() => null);
+            this.country.set(data?.address?.country ?? null);
+          } catch {}
+          resolve(true);
         },
-        (err) => {
-          if (err.code === err.PERMISSION_DENIED) this.error.set('Location access denied');
-          else this.error.set('Cannot read location');
-        },
+        () => { if (hideOnError) this.hide(); resolve(false); },
         { enableHighAccuracy: false, timeout: 8000, maximumAge: 600000 }
       );
     });
   }
 
-  private haversine(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  private async resolveViaIp(): Promise<boolean> {
+    try {
+      const r = await fetch('https://ipapi.co/json/', { headers: { Accept: 'application/json' } });
+      if (!r.ok) return false;
+      const data = await r.json();
+      const lat = data.latitude ?? data.lat;
+      const lng = data.longitude ?? data.lon;
+      if (typeof lat !== 'number' || typeof lng !== 'number') return false;
+      this.applyUserAndDistance({ lat, lng });
+      this.country.set(data.country_name ?? data.country ?? null);
+      return true;
+    } catch { return false; }
+  }
+
+  private applyUserAndDistance(you: LatLng) {
+    this.user.set(you);
+    this.distanceKm.set(this.haversine({ lat: this.lat, lng: this.lng }, you));
+  }
+
+  private initMap(user: LatLng, dest: LatLng): void {
+    this.map = L.map('distanceMap', {
+      zoomControl: true,
+      attributionControl: true,
+      scrollWheelZoom: false, // nicer UX on page scroll
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors',
+    }).addTo(this.map);
+
+    // Use explicit icon and no title to avoid “Marker” overlays
+    this.userMarker = L.marker([user.lat, user.lng], { icon: this.pinIcon!, title: '' })
+      .addTo(this.map).bindPopup('You');
+    this.destMarker = L.marker([dest.lat, dest.lng], { icon: this.pinIcon!, title: '' })
+      .addTo(this.map).bindPopup(this.cityLabel);
+
+    const bounds = L.latLngBounds([user.lat, user.lng], [dest.lat, dest.lng]).pad(0.25);
+    this.map.fitBounds(bounds);
+
+    this.path = L.polyline([[user.lat, user.lng], [dest.lat, dest.lng]], {
+      color: '#ef4444',
+      weight: 4,
+      opacity: 0.95,
+      dashArray: '10 12',
+      lineCap: 'round',
+      dashOffset: '0px',
+    }).addTo(this.map);
+
+    // Animate dash offset (~30fps)
+    let offset = 0;
+    this.dashTimer = window.setInterval(() => {
+      this.path?.setStyle({ dashOffset: `${offset}px` });
+      offset = (offset + 2) % 1000;
+    }, 33);
+  }
+
+  private haversine(a: LatLng, b: LatLng): number {
     const toRad = (x: number) => (x * Math.PI) / 180;
-    const R = 6371; // km
-    const dLat = toRad(lat2 - lat1);
-    const dLon = toRad(lon2 - lon1);
-    const a =
+    const R = 6371;
+    const dLat = toRad(b.lat - a.lat);
+    const dLon = toRad(b.lng - a.lng);
+    const s =
       Math.sin(dLat / 2) ** 2 +
-      Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
-    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      Math.cos(toRad(a.lat)) * Math.cos(toRad(b.lat)) * Math.sin(dLon / 2) ** 2;
+    return R * 2 * Math.atan2(Math.sqrt(s), Math.sqrt(1 - s));
   }
 }
