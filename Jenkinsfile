@@ -1,24 +1,26 @@
-pipeline{
+pipeline {
   agent any
 
   stages {
-    stage("build"){
+    stage("build") {
       steps {
         echo 'building the app...'
+        sh 'echo "Quick check: listing files" && ls -l'
       }
     }
 
-      stage("test"){
+    stage("test") {
       steps {
         echo 'testing the app...'
+        sh 'node -v || echo "Node.js not installed"'
       }
     }
 
-      stage("deploy"){
+    stage("deploy") {
       steps {
         echo 'deploying the app...'
+        sh 'echo "Deployment step placeholder"'
       }
     }
-    
   }
 }
