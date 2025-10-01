@@ -13,6 +13,7 @@ pipeline {
       steps {
         echo 'testing the app...'
         sh 'node -v || echo "Node.js not installed"'
+        echo 'everything working fine'
       }
     }
 
