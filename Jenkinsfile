@@ -1,26 +1,22 @@
 pipeline {
-  agent any
+    agent any
+    stages {
+        stage("run frontend") {
+            steps {
+                echo 'executing yarn...'
+                nodejs('Node-10.17') {
+                    sh 'yarn install'
+                }
+            }
+        }
 
-  stages {
-    stage("build") {
-      steps {
-        echo 'building the app...'
-        sh 'echo "Quick check: listing files" && ls -l'
-      }
+        stage("run backend") {
+            steps {
+                echo 'executing gradle...'
+                withGradle() {
+                    sh './gradlew -v'
+                }
+            }
+        }
     }
-
-    stage("test") {
-      steps {
-        echo 'testing the app...'
-        sh 'node -v || echo "Node.js not installed"'
-      }
-    }
-
-    stage("deploy") {
-      steps {
-        echo 'deploying the app...'
-        sh 'echo "Deployment step placeholder"'
-      }
-    }
-  }
 }
