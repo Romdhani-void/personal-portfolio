@@ -1,22 +1,17 @@
 pipeline {
-    agent any
-    stages {
-        stage("run frontend") {
-            steps {
-                echo 'executing yarn...'
-                nodejs('Node-10.17') {
-                    sh 'yarn install'
-                }
-            }
-        }
-
-        stage("run backend") {
-            steps {
-                echo 'executing gradle...'
-                withGradle() {
-                    sh './gradlew -v'
-                }
-            }
-        }
+  agent any
+  tools { nodejs 'Node-20' }   // must match the name you created
+  stages {
+    stage('run frontend') {
+      steps {
+        sh '''
+          corepack enable || true
+          yarn --version || npm i -g yarn
+          yarn install
+          yarn build
+        '''
+      }
     }
+    // ... other stages
+  }
 }
