@@ -1,6 +1,6 @@
 pipeline {
   agent any
-  tools { nodejs 'Node-20' }   // must match the name you created
+  tools { nodejs 'Node-20' }   // must exist in Manage Jenkins → Tools
   stages {
     stage('run frontend') {
       steps {
@@ -12,6 +12,10 @@ pipeline {
         '''
       }
     }
-    // ... other stages
+    stage('run backend') {
+      steps {
+        sh 'echo "backend stage..."'
+      }
+    }
   }
 }
