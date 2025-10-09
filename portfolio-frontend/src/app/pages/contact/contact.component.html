@@ -28,7 +28,7 @@
       <a href="mailto:you@example.com"
         class="group block rounded-2xl border border-white/40 bg-white/50 dark:bg-white/10
                backdrop-blur-md p-4 shadow-sm hover:shadow-md transition focus:outline-none
-               focus-visible:ring-2 focus-visible:ring-[#b36b32]">
+               focus-visible:ring-2 focus-visible:ring-[#E11D48]">
         <div class="flex items-center gap-3">
           <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
             aria-hidden="true">
@@ -47,7 +47,7 @@
       <a href="https://www.linkedin.com/in/romdhani-mohamed-ali-5389aa183/" target="_blank" rel="noopener noreferrer"
         class="group block rounded-2xl border border-white/40 bg-white/50 dark:bg-white/10
                backdrop-blur-md p-4 shadow-sm hover:shadow-md transition focus:outline-none
-               focus-visible:ring-2 focus-visible:ring-[#b36b32]">
+               focus-visible:ring-2 focus-visible:ring-[#E11D48]">
         <div class="flex items-center gap-3">
           <svg class="h-5 w-5 text-gray-800 dark:text-gray-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
             aria-hidden="true" fill="currentColor">
@@ -66,7 +66,7 @@
       <a href="https://github.com/Romdhani-void" target="_blank" rel="noopener noreferrer"
         class="group block rounded-2xl border border-white/40 bg-white/50 dark:bg-white/10
                backdrop-blur-md p-4 shadow-sm hover:shadow-md transition focus:outline-none
-               focus-visible:ring-2 focus-visible:ring-[#b36b32]">
+               focus-visible:ring-2 focus-visible:ring-[#E11D48]">
         <div class="flex items-center gap-3">
           <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path
@@ -94,8 +94,8 @@
               type="text"
               autocomplete="name"
               class="mt-1 w-full rounded-xl border border-slate-300 bg-white/80 dark:bg-slate-900/40
-                     px-3 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b36b32]" />
-            <p *ngIf="f.name.touched && f.name.invalid" class="mt-1 text-xs text-[#b36b32]">
+                     px-3 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E11D48]" />
+            <p *ngIf="f.name.touched && f.name.invalid" class="mt-1 text-xs text-[#E11D48]">
               Enter at least 2 characters.
             </p>
           </label>
@@ -107,8 +107,8 @@
               type="email"
               autocomplete="email"
               class="mt-1 w-full rounded-xl border border-slate-300 bg-white/80 dark:bg-slate-900/40
-                     px-3 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b36b32]" />
-            <p *ngIf="f.email.touched && f.email.invalid" class="mt-1 text-xs text-[#b36b32]">
+                     px-3 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E11D48]" />
+            <p *ngIf="f.email.touched && f.email.invalid" class="mt-1 text-xs text-[#E11D48]">
               Provide a valid email.
             </p>
           </label>
@@ -121,7 +121,7 @@
             type="text"
             maxlength="120"
             class="mt-1 w-full rounded-xl border border-slate-300 bg-white/80 dark:bg-slate-900/40
-                   px-3 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b36b32]" />
+                   px-3 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E11D48]" />
         </label>
 
         <label class="block mt-4">
@@ -130,8 +130,8 @@
             formControlName="message"
             rows="6"
             class="mt-1 w-full rounded-xl border border-slate-300 bg-white/80 dark:bg-slate-900/40
-                   px-3 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b36b32]"></textarea>
-          <p *ngIf="f.message.touched && f.message.invalid" class="mt-1 text-xs text-[#b36b32]">
+                   px-3 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E11D48]"></textarea>
+          <p *ngIf="f.message.touched && f.message.invalid" class="mt-1 text-xs text-[#E11D48]">
             Say a bit more (≥ 10 chars).
           </p>
         </label>
@@ -145,16 +145,16 @@
         <div class="mt-4 min-h-6 text-sm">
           <p *ngIf="sending()">Sending…</p>
           <p *ngIf="sent()" class="text-emerald-600">Thanks! I’ll get back to you shortly.</p>
-          <p *ngIf="error()" class="text-[#b36b32]">{{ error() }}</p>
+          <p *ngIf="error()" class="text-[#E11D48]">{{ error() }}</p>
         </div>
 
         <div class="mt-6">
           <button
             type="submit"
             [disabled]="sending()"
-            class="rounded-full px-6 py-3 font-semibold bg-[#b36b32] text-white
+            class="rounded-full px-6 py-3 font-semibold bg-[#E11D48] text-white
                    hover:opacity-95 disabled:opacity-60 transition
-                   focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b36b32]">
+                   focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E11D48]">
             Send Message
           </button>
         </div>

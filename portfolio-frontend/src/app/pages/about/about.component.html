@@ -1,13 +1,16 @@
+<!-- HTML (brown → rose accent only) -->
 <app-navbar></app-navbar>
 
 <section class="max-w-5xl mx-auto px-6 pt-24 pb-24" aria-labelledby="about-heading">
   <div class="text-center">
-    <span class="inline-flex items-center rounded-full px-4 py-1 text-xs md:text-sm font-semibold
-             bg-slate-900 text-white dark:bg-white dark:text-slate-900">
+    <span
+      class="inline-flex items-center rounded-full px-4 py-1 text-xs md:text-sm font-semibold
+             bg-rose-600 text-white dark:bg-white dark:text-rose-600">
       About Me
     </span>
 
-    <h1 id="about-heading" class="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight leading-tight
+    <h1 id="about-heading"
+        class="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight leading-tight
                bg-gradient-to-b from-slate-900 to-slate-600 dark:from-white dark:to-slate-300
                bg-clip-text text-transparent">
       Who am I ?
@@ -19,7 +22,7 @@
     <aside class="space-y-4 lg:col-span-1">
       <div
         class="rounded-2xl border border-white/40 bg-white/50 dark:bg-white/10 backdrop-blur-md p-5
-               shadow-sm hover:shadow-md transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sunwarm)]">
+               shadow-sm hover:shadow-md transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]">
         <img src="assets/img/dali.jpg" alt="Dali" class="w-full h-auto object-cover rounded-xl" />
         <div class="mt-5 text-center space-y-1">
           <p class="font-semibold text-lg">Romdhani, Mohamed Ali</p>
@@ -30,48 +33,44 @@
 
     <!-- Info -->
     <div class="lg:col-span-2 rounded-2xl border border-white/40 bg-white/50 dark:bg-white/10
-             backdrop-blur-md p-8 md:p-10 shadow-lg flex flex-col justify-between">
+                backdrop-blur-md p-8 md:p-10 shadow-lg flex flex-col justify-between">
 
       <div class="space-y-6">
         <p class="text-slate-800 dark:text-slate-200 leading-relaxed text-[15px] md:text-base">
-          I’m Dali, a software engineer who likes building things that work and look clean. <br> 
+          I’m Dali, a software engineer who likes building things that work and look clean. <br>
           My goal is to keep improving one step, one commit at a time. <br><br>
         </p>
 
-        <blockquote class="border-l-4 pl-4 italic text-slate-700 dark:text-slate-300 text-[15px]"
-          style="border-color: var(--sunwarm);">
+        <blockquote class="border-l-4 pl-4 italic text-slate-700 dark:text-slate-300 text-[15px] accent-border">
           “Keep things clear. Keep learning. Build what matters.”
         </blockquote>
 
         <!-- Skill Cards -->
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-8">
           <button (click)="toggle('web')" class="skill-btn rounded-xl border border-white/40 bg-white/40 dark:bg-white/10 
-                   p-4 text-center hover:border-[var(--sunwarm)] transition">
+                          p-4 text-center hover-accent-border transition">
             <p class="font-semibold text-[15px]">MEAN Stack</p>
           </button>
 
           <button (click)="toggle('devops')" class="skill-btn rounded-xl border border-white/40 bg-white/40 dark:bg-white/10 
-                   p-4 text-center hover:border-[var(--sunwarm)] transition">
+                          p-4 text-center hover-accent-border transition">
             <p class="font-semibold text-[15px]">DevOps</p>
           </button>
 
           <button (click)="toggle('learning')" class="skill-btn rounded-xl border border-white/40 bg-white/40 dark:bg-white/10 
-                   p-4 text-center hover:border-[var(--sunwarm)] transition">
+                          p-4 text-center hover-accent-border transition">
             <p class="font-semibold text-[15px]">On My Desk</p>
           </button>
         </div>
 
-        <!-- Skill Panels -->
+        <!-- Panels -->
         <div class="mt-6 space-y-3">
-          <!-- MEAN Stack -->
           <div *ngIf="active === 'web'" class="space-y-4 transition-all">
-            <h3 class="font-semibold" style="color: var(--sunwarm);">MEAN Stack</h3>
-
+            <h3 class="font-semibold accent-text">MEAN Stack</h3>
             <figure class="rounded-xl border animate-blink-border overflow-hidden
-         border-white/40 bg-white/40 dark:bg-white/10 p-3 flex items-center justify-center">
+                           border-white/40 bg-white/40 dark:bg-white/10 p-3 flex items-center justify-center">
               <img src="assets/img/mean.png" alt="MEAN Stack" class="h-[70px] w-auto object-contain rounded-md" />
             </figure>
-
             <ul class="text-slate-700 dark:text-slate-300 text-sm list-disc list-inside leading-relaxed">
               <li>Angular (Standalone Components, Routing, RxJS)</li>
               <li>Node.js & Express APIs</li>
@@ -80,29 +79,24 @@
             </ul>
           </div>
 
-          <!-- DevOps -->
           <div *ngIf="active === 'devops'" class="space-y-4 transition-all">
-            <h3 class="font-semibold" style="color: var(--sunwarm);">DevOps</h3>
-
+            <h3 class="font-semibold accent-text">DevOps</h3>
             <figure class="rounded-xl border animate-blink-border overflow-hidden
-                     border-white/40 bg-white/40 dark:bg-white/10 p-3">
+                           border-white/40 bg-white/40 dark:bg-white/10 p-3">
               <img [src]="devopsDiagramUrl" alt="DevOps lifecycle" class="w-full h-auto rounded-lg" />
             </figure>
-
             <ul class="text-slate-700 dark:text-slate-300 text-sm list-disc list-inside leading-relaxed">
               <li>Docker & Docker Compose</li>
               <li>Jenkins Pipelines (CI/CD)</li>
               <li>GitHub Actions</li>
               <li>Kubernetes Basics</li>
               <li>EC2 uses</li>
-
               <li>Monitoring: Prometheus / Grafana</li>
             </ul>
           </div>
 
-          <!-- Learning -->
           <div *ngIf="active === 'learning'" class="space-y-2 transition-all">
-            <h3 class="font-semibold" style="color: var(--sunwarm);">Currently Exploring</h3>
+            <h3 class="font-semibold accent-text">Currently Exploring</h3>
             <ul class="text-slate-700 dark:text-slate-300 text-sm list-disc list-inside leading-relaxed">
               <li>Azure Cloud Fundamentals</li>
               <li>n8n Automation</li>
@@ -115,14 +109,12 @@
 
       <!-- CTAs -->
       <div class="mt-10 flex justify-center gap-5 flex-wrap">
-        <a href="assets/docs/Dali-Romdhani-Resume.pdf" download
-          class="rounded-full px-7 py-3 font-semibold text-white transition" style="background-color: var(--sunwarm);">
+        <a href="assets/docs/Romdhani-Resume.pdf" download
+           class="rounded-full px-7 py-3 font-semibold text-white transition btn-solid">
           Download Resume
         </a>
-        <a routerLink="/work" class="rounded-full px-7 py-3 font-semibold border transition"
-          style="border-color: var(--sunwarm); color: var(--sunwarm);"
-          onmouseover="this.style.backgroundColor='var(--sunwarm)'; this.style.color='white';"
-          onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--sunwarm)';">
+        <a routerLink="/work"
+           class="rounded-full px-7 py-3 font-semibold border transition btn-outline">
           View My Work
         </a>
       </div>

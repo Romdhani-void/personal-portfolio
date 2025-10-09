@@ -1,18 +1,18 @@
+/* ---- shared accent ---- */
+:host {
+  --accent: #E11D48;            /* rose-600 */
+  --accent-rgb: 225, 29, 72;
+}
+
 /* Vertical centering helper */
 .min-h-55vh { min-height: 55vh; }
 
 /* Clamp utilities */
 .clamp-2 {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
 }
 .clamp-3 {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;
 }
 
 /* Reduced motion */
@@ -23,38 +23,66 @@
 /* Hover pop on the sticker */
 article.group:hover .-rotate-6 { transform: rotate(-2deg) scale(1.02); }
 
-/* n8n minimal corner ribbon (kept as-is; not part of brand accent) */
+/* n8n corner (unchanged) */
 .auto-corner {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
+  position: absolute; top: 6px; right: 6px; width: 28px; height: 28px; border-radius: 8px;
   background: linear-gradient(135deg, rgba(16,185,129,0.16), rgba(59,130,246,0.10));
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(15, 118, 110, 0.18);
-  z-index: 30;
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  display: grid; place-items: center; border: 1px solid rgba(15,118,110,0.18); z-index: 30;
 }
-.auto-icon {
-  width: 14px;
-  height: 14px;
-  stroke: rgb(16, 185, 129);
-  color: rgb(16, 185, 129);
-  display: block;
-  opacity: 0.95;
+.auto-icon { width:14px; height:14px; stroke:rgb(16,185,129); color:rgb(16,185,129); display:block; opacity:.95; }
+article.group:hover .auto-corner { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,0,0,0.10); }
+@media (prefers-reduced-motion: reduce) { article.group:hover .auto-corner { transform: none; } }
+@media (forced-colors: active) { .auto-corner { border-color: CanvasText; } }
+
+/* ------- accent replacements ------- */
+.filter-btn {
+  padding: .5rem 1rem; border-radius: 9999px; font-weight: 700; font-size: .875rem;
+  border: 1px solid #e5e7eb; background:#fff; color:#374151; transition: .2s;
 }
-article.group:hover .auto-corner {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.10);
+.filter-btn:hover { background:#f9fafb; color:#111827; }
+.filter-btn:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--accent); }
+
+.filter-btn.is-active {
+  background: var(--accent); color:#fff; border-color: var(--accent);
 }
-@media (prefers-reduced-motion: reduce) {
-  article.group:hover .auto-corner { transform: none; }
+.filter-btn.is-active:hover { background: var(--accent); color:#fff; }
+
+/* card accent gradient (rose) */
+.accent-grad {
+  background-image:
+    linear-gradient(to bottom right,
+      rgba(var(--accent-rgb), .20),
+      rgba(var(--accent-rgb), .14),
+      rgba(var(--accent-rgb), .22)
+    );
 }
-@media (forced-colors: active) {
-  .auto-corner { border-color: CanvasText; }
+.accent-grad:hover {
+  background-image:
+    linear-gradient(to bottom right,
+      rgba(var(--accent-rgb), .30),
+      rgba(var(--accent-rgb), .22),
+      rgba(var(--accent-rgb), .32)
+    );
 }
+
+/* sticker “Video available” */
+.video-badge {
+  background: var(--accent); color:#fff;
+}
+
+/* duration chip */
+.duration-chip {
+  border: 1px solid rgba(var(--accent-rgb), .20);
+  background: rgba(var(--accent-rgb), .10);
+  color: var(--accent);
+}
+
+/* primary CTA in card footer */
+.btn-accent {
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color:#fff;
+}
+.btn-accent:hover { opacity:.95; }

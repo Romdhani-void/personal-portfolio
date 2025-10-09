@@ -18,13 +18,10 @@
       *ngFor="let f of filters"
       type="button"
       (click)="setActive(f.key)"
-      class="px-4 py-2 rounded-full text-sm font-semibold transition
-             focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b36b32] focus-visible:ring-offset-2"
+      class="filter-btn"
+      [class.is-active]="active === f.key"
       [attr.aria-pressed]="active === f.key"
-      [attr.aria-label]="'Filter: ' + f.label"
-      [ngClass]="active === f.key
-        ? 'bg-[#b36b32] text-white border border-[#b36b32] hover:bg-[#b36b32] hover:text-white'
-        : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 hover:text-gray-900'">
+      [attr.aria-label]="'Filter: ' + f.label">
       {{ f.label }}
     </button>
   </div>
@@ -32,27 +29,16 @@
   <!-- Cards block -->
   <div [ngClass]="active === 'all' ? 'mt-10 min-h-55vh flex items-center justify-center' : 'mt-6'">
     <ul class="flex flex-wrap justify-center gap-5" role="list" aria-label="Projects">
-      <li
-        *ngFor="let p of filtered; trackBy: trackById"
-        class="w-full sm:w-72 md:w-80 xl:w-80"
-        role="listitem"
-      >
-        <article
-          class="group relative overflow-visible rounded-2xl p-0.5
-                 bg-gradient-to-br from-[#b36b32]/20 via-[#d28a4c]/20 to-[#8c5326]/20
-                 hover:from-[#b36b32]/30 hover:via-[#d28a4c]/30 hover:to-[#8c5326]/30 transition"
-        >
+      <li *ngFor="let p of filtered; trackBy: trackById" class="w-full sm:w-72 md:w-80 xl:w-80" role="listitem">
+        <article class="group relative overflow-visible rounded-2xl p-0.5 accent-grad transition">
           <!-- Sticker (DevOps in All with video) -->
           <div
             *ngIf="active === 'all' && p.roles?.includes('devops') && p.videoLink"
             class="pointer-events-none absolute -top-2 left-1/2 transform -translate-x-1/2 z-20"
-            aria-hidden="true"
-          >
-            <span
-              class="inline-block transform -rotate-6 group-hover:-rotate-2 transition-transform
-                     text-center rounded-full bg-[#b36b32] text-white text-[10px] leading-none
-                     font-bold px-3 py-1 shadow-md ring-2 ring-white"
-            >
+            aria-hidden="true">
+            <span class="inline-block transform -rotate-6 group-hover:-rotate-2 transition-transform
+                          text-center rounded-full video-badge text-[10px] leading-none
+                          font-bold px-3 py-1 shadow-md ring-2 ring-white">
               Video available
             </span>
           </div>
@@ -75,8 +61,7 @@
                 {{ p.title }}
               </h3>
 
-              <span *ngIf="p.duration"
-                    class="shrink-0 inline-flex items-center rounded-full border border-[#b36b32]/20 bg-[#b36b32]/10 px-2 py-0.5 text-[10px] font-semibold text-[#b36b32]">
+              <span *ngIf="p.duration" class="shrink-0 inline-flex items-center rounded-full duration-chip px-2 py-0.5 text-[10px] font-semibold">
                 {{ p.duration }}
               </span>
             </div>
@@ -88,10 +73,8 @@
             <!-- Metrics -->
             <ng-container *ngIf="p.metrics as metrics">
               <div class="mt-3 flex flex-wrap justify-center items-center gap-1.5" aria-label="Key metrics">
-                <span
-                  *ngFor="let m of metrics | slice:0:2"
-                  class="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-2 py-0.5 text-[10px] font-medium text-gray-700"
-                >
+                <span *ngFor="let m of metrics | slice:0:2"
+                      class="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-2 py-0.5 text-[10px] font-medium text-gray-700">
                   {{ m }}
                 </span>
                 <span *ngIf="metrics.length > 2" class="text-[10px] text-gray-500" aria-label="More metrics">
@@ -102,10 +85,7 @@
 
             <!-- Tags -->
             <div class="mt-3 flex flex-wrap justify-center gap-1.5" aria-label="Tags">
-              <span
-                *ngFor="let t of p.tags"
-                class="px-2 py-0.5 rounded-full text-[10px] bg-gray-100 text-gray-700 border border-gray-200"
-              >
+              <span *ngFor="let t of p.tags" class="px-2 py-0.5 rounded-full text-[10px] bg-gray-100 text-gray-700 border border-gray-200">
                 {{ t }}
               </span>
             </div>
@@ -119,26 +99,19 @@
 
               <div class="ml-auto">
                 <!-- Watch Video if present -->
-                <a
-                  *ngIf="p.videoLink; else detailsBtn"
-                  [href]="p.videoLink"
-                  target="_blank" rel="noopener noreferrer"
-                  class="inline-flex items-center gap-1 rounded-full border border-[#b36b32] bg-[#b36b32]
-                         px-3 py-1 text-[11px] font-semibold text-white hover:opacity-95"
-                >
+                <a *ngIf="p.videoLink; else detailsBtn"
+                   [href]="p.videoLink" target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center gap-1 rounded-full btn-accent px-3 py-1 text-[11px] font-semibold">
                   Watch Video
                 </a>
 
                 <!-- Otherwise View Details -->
                 <ng-template #detailsBtn>
-                  <a
-                    *ngIf="getPrimaryLink(p) as href"
-                    [href]="href"
-                    [attr.target]="p.isExternal ? '_blank' : null"
-                    [attr.rel]="p.isExternal ? 'noopener noreferrer' : null"
-                    class="inline-flex items-center gap-1 rounded-full border border-gray-300 bg-white
-                           px-3 py-1 text-[11px] font-semibold text-gray-700 hover:bg-gray-50"
-                  >
+                  <a *ngIf="getPrimaryLink(p) as href"
+                     [href]="href" [attr.target]="p.isExternal ? '_blank' : null"
+                     [attr.rel]="p.isExternal ? 'noopener noreferrer' : null"
+                     class="inline-flex items-center gap-1 rounded-full border border-gray-300 bg-white
+                            px-3 py-1 text-[11px] font-semibold text-gray-700 hover:bg-gray-50">
                     View Details
                   </a>
                 </ng-template>

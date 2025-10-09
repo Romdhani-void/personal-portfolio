@@ -1,38 +1,44 @@
+/* CSS (rose accent) */
 :host {
+  --accent: #E11D48;          /* rose-600 */
+  --accent-rgb: 225, 29, 72;
   display: block;
-  --sunwarm: #b36b32; /* deep warm brown */
 }
 
-/* blink animation */
+/* text/border helpers */
+.accent-text { color: var(--accent); }
+.accent-border { border-color: var(--accent) !important; }
+.hover-accent-border:hover { border-color: var(--accent); }
+
+/* CTA buttons */
+.btn-solid { background-color: var(--accent); }
+.btn-solid:hover { filter: brightness(0.95); }
+
+.btn-outline {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.btn-outline:hover {
+  background-color: var(--accent);
+  color: #fff;
+}
+
+/* glow animation updated to rose */
 @keyframes blinkBorder {
   0%, 100% {
     border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 0 0 0 rgba(179, 107, 50, 0.25);
+    box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0.25);
   }
   50% {
-    border-color: var(--sunwarm);
-    box-shadow: 0 0 10px 2px rgba(179, 107, 50, 0.35);
+    border-color: var(--accent);
+    box-shadow: 0 0 10px 2px rgba(var(--accent-rgb), 0.35);
   }
 }
+.animate-blink-border { animation: blinkBorder 2s infinite ease-in-out; }
 
-.animate-blink-border {
-  animation: blinkBorder 2s infinite ease-in-out;
-}
+/* skill buttons */
+.skill-btn { cursor: pointer; animation: blinkBorder 3.5s infinite ease-in-out; transition: all .25s; }
+.skill-btn:hover { animation: none; }
 
-/* skill button animation */
-.skill-btn {
-  cursor: pointer;
-  animation: blinkBorder 3.5s infinite ease-in-out;
-  transition: all 0.25s ease;
-}
-
-.skill-btn:hover {
-  border-color: var(--sunwarm);
-  animation: none;
-}
-
-a[download],
-a[routerLink] {
-  min-width: 180px;
-  text-align: center;
-}
+/* focus ring aligns to accent (for keyboard users) */
+:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--accent); }

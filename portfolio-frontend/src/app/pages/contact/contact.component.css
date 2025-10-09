@@ -2,12 +2,13 @@
   display: block;
 }
 
-/* warm brown accent */
+/* rose accent for inputs and textarea caret */
 input,
 textarea {
-  caret-color: #b36b32;
+  caret-color: #E11D48;
 }
 
+/* reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .transition,
   .transition-transform {
