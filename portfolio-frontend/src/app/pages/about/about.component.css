@@ -1,5 +1,38 @@
-:host { display: block; }
+:host {
+  display: block;
+  --sunwarm: #b36b32; /* deep warm brown */
+}
 
-@media (prefers-reduced-motion: reduce) {
-  .transition, .transition-transform { transition: none !important; }
+/* blink animation */
+@keyframes blinkBorder {
+  0%, 100% {
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 0 0 rgba(179, 107, 50, 0.25);
+  }
+  50% {
+    border-color: var(--sunwarm);
+    box-shadow: 0 0 10px 2px rgba(179, 107, 50, 0.35);
+  }
+}
+
+.animate-blink-border {
+  animation: blinkBorder 2s infinite ease-in-out;
+}
+
+/* skill button animation */
+.skill-btn {
+  cursor: pointer;
+  animation: blinkBorder 3.5s infinite ease-in-out;
+  transition: all 0.25s ease;
+}
+
+.skill-btn:hover {
+  border-color: var(--sunwarm);
+  animation: none;
+}
+
+a[download],
+a[routerLink] {
+  min-width: 180px;
+  text-align: center;
 }

@@ -23,7 +23,7 @@
 /* Hover pop on the sticker */
 article.group:hover .-rotate-6 { transform: rotate(-2deg) scale(1.02); }
 
-/* n8n minimal corner ribbon */
+/* n8n minimal corner ribbon (kept as-is; not part of brand accent) */
 .auto-corner {
   position: absolute;
   top: 6px;
@@ -40,7 +40,6 @@ article.group:hover .-rotate-6 { transform: rotate(-2deg) scale(1.02); }
   border: 1px solid rgba(15, 118, 110, 0.18);
   z-index: 30;
 }
-
 .auto-icon {
   width: 14px;
   height: 14px;
@@ -49,16 +48,13 @@ article.group:hover .-rotate-6 { transform: rotate(-2deg) scale(1.02); }
   display: block;
   opacity: 0.95;
 }
-
 article.group:hover .auto-corner {
   transform: translateY(-1px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.10);
 }
-
 @media (prefers-reduced-motion: reduce) {
   article.group:hover .auto-corner { transform: none; }
 }
-
 @media (forced-colors: active) {
   .auto-corner { border-color: CanvasText; }
 }

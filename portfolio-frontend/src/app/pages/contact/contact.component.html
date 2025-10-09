@@ -2,14 +2,17 @@
 
 <section class="max-w-5xl mx-auto px-6 pt-24 pb-20" aria-labelledby="contact-heading">
   <div class="text-center">
-    <span class="inline-flex items-center rounded-full px-4 py-1 text-xs md:text-sm font-semibold
-                 bg-slate-900 text-white dark:bg-white dark:text-slate-900">
+    <span
+      class="inline-flex items-center rounded-full px-4 py-1 text-xs md:text-sm font-semibold
+             bg-slate-900 text-white dark:bg-white dark:text-slate-900">
       Contact
     </span>
 
-    <h1 id="contact-heading" class="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight leading-tight
-               bg-gradient-to-b from-slate-900 to-slate-600 dark:from-white dark:to-slate-300
-               bg-clip-text text-transparent">
+    <h1
+      id="contact-heading"
+      class="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight leading-tight
+             bg-gradient-to-b from-slate-900 to-slate-600 dark:from-white dark:to-slate-300
+             bg-clip-text text-transparent">
       Let’s build something useful
     </h1>
 
@@ -22,9 +25,10 @@
     <!-- Quick links -->
     <aside class="lg:col-span-1 space-y-4">
       <!-- Email -->
-      <a href="mailto:you@example.com" class="group block rounded-2xl border border-white/40 bg-white/50 dark:bg-white/10
-                backdrop-blur-md p-4 shadow-sm hover:shadow-md transition focus:outline-none
-                focus-visible:ring-2 focus-visible:ring-rose-400">
+      <a href="mailto:you@example.com"
+        class="group block rounded-2xl border border-white/40 bg-white/50 dark:bg-white/10
+               backdrop-blur-md p-4 shadow-sm hover:shadow-md transition focus:outline-none
+               focus-visible:ring-2 focus-visible:ring-[#b36b32]">
         <div class="flex items-center gap-3">
           <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
             aria-hidden="true">
@@ -42,10 +46,9 @@
       <!-- LinkedIn -->
       <a href="https://www.linkedin.com/in/romdhani-mohamed-ali-5389aa183/" target="_blank" rel="noopener noreferrer"
         class="group block rounded-2xl border border-white/40 bg-white/50 dark:bg-white/10
-          backdrop-blur-md p-4 shadow-sm hover:shadow-md transition focus:outline-none
-          focus-visible:ring-2 focus-visible:ring-rose-400">
+               backdrop-blur-md p-4 shadow-sm hover:shadow-md transition focus:outline-none
+               focus-visible:ring-2 focus-visible:ring-[#b36b32]">
         <div class="flex items-center gap-3">
-          <!-- LinkedIn monochrome -->
           <svg class="h-5 w-5 text-gray-800 dark:text-gray-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
             aria-hidden="true" fill="currentColor">
             <path
@@ -59,12 +62,11 @@
         </div>
       </a>
 
-
-
       <!-- GitHub -->
-      <a href="https://github.com/Romdhani-void" target="_blank" rel="noopener noreferrer" class="group block rounded-2xl border border-white/40 bg-white/50 dark:bg-white/10
-                backdrop-blur-md p-4 shadow-sm hover:shadow-md transition focus:outline-none
-                focus-visible:ring-2 focus-visible:ring-rose-400">
+      <a href="https://github.com/Romdhani-void" target="_blank" rel="noopener noreferrer"
+        class="group block rounded-2xl border border-white/40 bg-white/50 dark:bg-white/10
+               backdrop-blur-md p-4 shadow-sm hover:shadow-md transition focus:outline-none
+               focus-visible:ring-2 focus-visible:ring-[#b36b32]">
         <div class="flex items-center gap-3">
           <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path
@@ -87,31 +89,49 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <label class="block">
             <span class="text-sm font-semibold">Name</span>
-            <input formControlName="name" type="text" autocomplete="name" class="mt-1 w-full rounded-xl border border-slate-300 bg-white/80 dark:bg-slate-900/40
-                          px-3 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400" />
-            <p *ngIf="f.name.touched && f.name.invalid" class="mt-1 text-xs text-rose-600">Enter at least 2 characters.
+            <input
+              formControlName="name"
+              type="text"
+              autocomplete="name"
+              class="mt-1 w-full rounded-xl border border-slate-300 bg-white/80 dark:bg-slate-900/40
+                     px-3 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b36b32]" />
+            <p *ngIf="f.name.touched && f.name.invalid" class="mt-1 text-xs text-[#b36b32]">
+              Enter at least 2 characters.
             </p>
           </label>
 
           <label class="block">
             <span class="text-sm font-semibold">Email</span>
-            <input formControlName="email" type="email" autocomplete="email" class="mt-1 w-full rounded-xl border border-slate-300 bg-white/80 dark:bg-slate-900/40
-                          px-3 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400" />
-            <p *ngIf="f.email.touched && f.email.invalid" class="mt-1 text-xs text-rose-600">Provide a valid email.</p>
+            <input
+              formControlName="email"
+              type="email"
+              autocomplete="email"
+              class="mt-1 w-full rounded-xl border border-slate-300 bg-white/80 dark:bg-slate-900/40
+                     px-3 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b36b32]" />
+            <p *ngIf="f.email.touched && f.email.invalid" class="mt-1 text-xs text-[#b36b32]">
+              Provide a valid email.
+            </p>
           </label>
         </div>
 
         <label class="block mt-4">
           <span class="text-sm font-semibold">Subject <span class="text-slate-400">(optional)</span></span>
-          <input formControlName="subject" type="text" maxlength="120" class="mt-1 w-full rounded-xl border border-slate-300 bg-white/80 dark:bg-slate-900/40
-                        px-3 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400" />
+          <input
+            formControlName="subject"
+            type="text"
+            maxlength="120"
+            class="mt-1 w-full rounded-xl border border-slate-300 bg-white/80 dark:bg-slate-900/40
+                   px-3 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b36b32]" />
         </label>
 
         <label class="block mt-4">
           <span class="text-sm font-semibold">Message</span>
-          <textarea formControlName="message" rows="6" class="mt-1 w-full rounded-xl border border-slate-300 bg-white/80 dark:bg-slate-900/40
-                           px-3 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"></textarea>
-          <p *ngIf="f.message.touched && f.message.invalid" class="mt-1 text-xs text-rose-600">
+          <textarea
+            formControlName="message"
+            rows="6"
+            class="mt-1 w-full rounded-xl border border-slate-300 bg-white/80 dark:bg-slate-900/40
+                   px-3 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b36b32]"></textarea>
+          <p *ngIf="f.message.touched && f.message.invalid" class="mt-1 text-xs text-[#b36b32]">
             Say a bit more (≥ 10 chars).
           </p>
         </label>
@@ -125,13 +145,16 @@
         <div class="mt-4 min-h-6 text-sm">
           <p *ngIf="sending()">Sending…</p>
           <p *ngIf="sent()" class="text-emerald-600">Thanks! I’ll get back to you shortly.</p>
-          <p *ngIf="error()" class="text-rose-600">{{ error() }}</p>
+          <p *ngIf="error()" class="text-[#b36b32]">{{ error() }}</p>
         </div>
 
         <div class="mt-6">
-          <button type="submit" [disabled]="sending()" class="rounded-full px-6 py-3 font-semibold bg-rose-600 text-white
-                         hover:opacity-95 disabled:opacity-60 transition
-                         focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400">
+          <button
+            type="submit"
+            [disabled]="sending()"
+            class="rounded-full px-6 py-3 font-semibold bg-[#b36b32] text-white
+                   hover:opacity-95 disabled:opacity-60 transition
+                   focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b36b32]">
             Send Message
           </button>
         </div>

@@ -28,7 +28,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   private currentChar = 0;
 
   ngAfterViewInit(): void {
-    // Init Vanta background
     if (!VANTA || !VANTA.BIRDS || !this.vantaRef?.nativeElement) {
       console.warn('[VANTA] BIRDS not available or element missing.');
     } else {
@@ -41,8 +40,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         minWidth: 200,
         scale: 1.0,
         scaleMobile: 1.0,
-        backgroundColor: 0xF8FAFC, // soft white background
-        color1: 0x808080, // warm beige
+        backgroundColor: 0xF8FAFC,
+        color1: 0x808080,
         color2: 0x0,
         wingSpan: 30,
         speedLimit: 2.0,
@@ -50,7 +49,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       });
     }
 
-    // Start typing animation
     this.typeNextCharacter();
   }
 
@@ -60,12 +58,12 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       if (this.currentChar < currentText.length) {
         this.displayedText += currentText.charAt(this.currentChar);
         this.currentChar++;
-        this.typingInterval = setTimeout(() => this.typeNextCharacter(), 30); // speed per char
+        this.typingInterval = setTimeout(() => this.typeNextCharacter(), 30);
       } else {
-        this.displayedText += '\n'; // line break between bullets
+        this.displayedText += '\n';
         this.currentBullet++;
         this.currentChar = 0;
-        this.typingInterval = setTimeout(() => this.typeNextCharacter(), 300); // pause before next bullet
+        this.typingInterval = setTimeout(() => this.typeNextCharacter(), 300);
       }
     }
   }

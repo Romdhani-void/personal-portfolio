@@ -19,11 +19,11 @@
       type="button"
       (click)="setActive(f.key)"
       class="px-4 py-2 rounded-full text-sm font-semibold transition
-             focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 focus-visible:ring-offset-2"
+             focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b36b32] focus-visible:ring-offset-2"
       [attr.aria-pressed]="active === f.key"
       [attr.aria-label]="'Filter: ' + f.label"
       [ngClass]="active === f.key
-        ? 'bg-rose-600 text-white border border-rose-600 hover:bg-rose-600 hover:text-white'
+        ? 'bg-[#b36b32] text-white border border-[#b36b32] hover:bg-[#b36b32] hover:text-white'
         : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 hover:text-gray-900'">
       {{ f.label }}
     </button>
@@ -39,8 +39,8 @@
       >
         <article
           class="group relative overflow-visible rounded-2xl p-0.5
-                 bg-gradient-to-br from-rose-200 via-fuchsia-200 to-sky-200
-                 hover:from-rose-300 hover:via-fuchsia-300 hover:to-sky-300 transition"
+                 bg-gradient-to-br from-[#b36b32]/20 via-[#d28a4c]/20 to-[#8c5326]/20
+                 hover:from-[#b36b32]/30 hover:via-[#d28a4c]/30 hover:to-[#8c5326]/30 transition"
         >
           <!-- Sticker (DevOps in All with video) -->
           <div
@@ -50,7 +50,7 @@
           >
             <span
               class="inline-block transform -rotate-6 group-hover:-rotate-2 transition-transform
-                     text-center rounded-full bg-rose-600 text-white text-[10px] leading-none
+                     text-center rounded-full bg-[#b36b32] text-white text-[10px] leading-none
                      font-bold px-3 py-1 shadow-md ring-2 ring-white"
             >
               Video available
@@ -76,7 +76,7 @@
               </h3>
 
               <span *ngIf="p.duration"
-                    class="shrink-0 inline-flex items-center rounded-full border border-rose-200 bg-rose-50 px-2 py-0.5 text-[10px] font-semibold text-rose-700">
+                    class="shrink-0 inline-flex items-center rounded-full border border-[#b36b32]/20 bg-[#b36b32]/10 px-2 py-0.5 text-[10px] font-semibold text-[#b36b32]">
                 {{ p.duration }}
               </span>
             </div>
@@ -123,8 +123,8 @@
                   *ngIf="p.videoLink; else detailsBtn"
                   [href]="p.videoLink"
                   target="_blank" rel="noopener noreferrer"
-                  class="inline-flex items-center gap-1 rounded-full border border-rose-600 bg-rose-600
-                         px-3 py-1 text-[11px] font-semibold text-white hover:bg-rose-700"
+                  class="inline-flex items-center gap-1 rounded-full border border-[#b36b32] bg-[#b36b32]
+                         px-3 py-1 text-[11px] font-semibold text-white hover:opacity-95"
                 >
                   Watch Video
                 </a>

@@ -1,6 +1,16 @@
-:host { display: block; }
-input, textarea { caret-color: rgb(244 63 94); /* rose-600 */ }
+:host {
+  display: block;
+}
+
+/* warm brown accent */
+input,
+textarea {
+  caret-color: #b36b32;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .transition, .transition-transform { transition: none !important; }
+  .transition,
+  .transition-transform {
+    transition: none !important;
+  }
 }
