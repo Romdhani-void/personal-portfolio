@@ -1,11 +1,12 @@
-#1. Build Angular
+# Build
 FROM node:20-alpine AS build
 WORKDIR /app
+COPY package*.json ./
+RUN npm ci
 COPY . .
-RUN npm ci && npm run build -- --configuration=production 
+RUN npm run build -- --configuration=production
 
-
-#2. Serve project with reverse proxy nginx
+# Serve
 FROM nginx:alpine
-COPY --from=build /app/dist/romdhani-void /usr/share/nginx/html
+COPY --from=build /app/dist/portfolio-frontend/browser/ /usr/share/nginx/html/
 EXPOSE 80

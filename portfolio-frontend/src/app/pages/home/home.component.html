@@ -1,39 +1,99 @@
-<nav class="fixed top-0 left-0 w-full z-50 bg-white/10">
+<nav class="fixed top-0 left-0 w-full z-[60] backdrop-blur bg-white/50 dark:bg-slate-900/40">
   <app-navbar></app-navbar>
 </nav>
 
-<section #vantaRef id="vanta-bg" class="relative w-full h-screen overflow-hidden">
-  <div class="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center
-              bg-white/10 rounded-xl p-10">
+<section class="relative w-full min-h-screen overflow-hidden">
+  <!-- BACKGROUND: gradient blobs + dotted grid (bottom layer) -->
+  <div class="pointer-events-none absolute inset-0 -z-20">
+    <div class="absolute -top-32 -left-24 h-96 w-96 rounded-full bg-gradient-to-br from-rose-400 to-fuchsia-500 opacity-30 blur-3xl animate-blob"></div>
+    <div class="absolute top-1/3 -right-24 h-96 w-96 rounded-full bg-gradient-to-br from-sky-400 to-indigo-500 opacity-30 blur-3xl animate-blob animation-delay-2000"></div>
+    <div class="absolute bottom-0 left-1/4 h-80 w-80 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 opacity-25 blur-3xl animate-blob animation-delay-4000"></div>
+    <div class="absolute inset-0 bg-grid-slate"></div>
+  </div>
 
-    <!-- Badge -->
-    <span class="mb-6 inline-flex items-center rounded-full px-4 py-1 text-sm font-medium
-                 bg-slate-500 text-white">
-      Software Engineer · Subject Matter Expert
-    </span>
+  <!-- SNOW (middle layer) -->
+  <canvas #snowCanvas class="absolute inset-0 -z-10 w-full h-full block"></canvas>
 
-    <!-- Big title -->
-    <h1 class="animate-bounce-slow text-5xl md:text-7xl font-extrabold tracking-tight
-               bg-gradient-to-b from-gray-900 to-gray-600 bg-clip-text text-transparent">
-      Crafting Digital Experiences
-    </h1>
+  <!-- CONTENT -->
+  <div class="mx-auto max-w-6xl px-6 pt-28 pb-20 grid gap-10 md:grid-cols-2 items-start">
+    <!-- LEFT -->
+    <header class="text-left">
+      <span class="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold
+                   bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow">
+        <span class="inline-block h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        {{ currentRole }}
+      </span>
 
-    <!-- Typing text -->
-    <p class="mt-6 max-w-3xl text-gray-700 font-medium text-left leading-relaxed whitespace-pre-line">
-      {{ displayedText }}
-    </p>
+      <h1 class="mt-6 text-5xl md:text-4xl font-extrabold leading-[1.05] text-slate-900 dark:text-white">
+        Build • Automate • Deliver
+      </h1>
 
+      <p class="mt-5 max-w-xl text-slate-600 dark:text-slate-300 leading-relaxed">
+        I design resilient systems, streamline CI/CD pipelines, and ensure every release is fast, secure, and reliable —
+        turning complex deployments into smooth automated workflows.
+      </p>
 
-    <!-- CTAs -->
-    <div class="mt-8 flex flex-wrap justify-center gap-4">
-      <a routerLink="/work"
-        class="rounded-full px-6 py-3 font-semibold bg-rose-600 text-white hover:opacity-95 transition">
-        View My Work
-      </a>
-      <a routerLink="/contact"
-        class="rounded-full px-6 py-3 font-semibold border border-gray-900 text-gray-900 hover:bg-gray-100 transition">
-        Get in Touch
-      </a>
-    </div>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a routerLink="/work"
+           class="rounded-full px-6 py-3 font-semibold bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow hover:shadow-md active:scale-[0.99] transition">
+          See Projects
+        </a>
+        <a routerLink="/contact"
+           class="rounded-full px-6 py-3 font-semibold border border-slate-900/80 text-slate-900 hover:bg-slate-50 transition
+                  dark:border-white/80 dark:text-white dark:hover:bg-white/10">
+          Contact Me
+        </a>
+      </div>
+
+      <!-- Tech Tags -->
+      <ul class="mt-6 flex flex-wrap gap-2 text-xs text-slate-500 dark:text-slate-400" aria-label="Tech stack">
+        <li class="tag">Linux</li>
+        <li class="tag">Angular</li>
+        <li class="tag">Node.js</li>
+        <li class="tag">Docker</li>
+        <li class="tag">Jenkins</li>
+        <li class="tag">CI/CD</li>
+        <li class="tag">Azure</li>
+        <li class="tag">Cloudflare</li>
+      </ul>
+    </header>
+
+    <!-- RIGHT -->
+    <aside #tiltCard (mousemove)="onTilt($event)" (mouseleave)="resetTilt()" class="relative group select-none">
+      <div class="relative rounded-2xl overflow-hidden p-6 md:p-8 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl ring-1 ring-black/5 shadow-2xl transition-transform will-change-transform"
+           [style.transform]="tilt">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Portfolio Health Overview</h3>
+          <span class="rounded-full text-xs px-2 py-1"
+                [ngClass]="statusPillClass">{{ statusText }}</span>
+        </div>
+
+        <dl class="mt-6 grid grid-cols-2 gap-6 text-sm">
+          <div>
+            <dt class="text-slate-500 dark:text-slate-400">Last Deployment</dt>
+            <dd class="font-semibold text-slate-900 dark:text-white">{{ lastDeployment }}</dd>
+          </div>
+          <div>
+            <dt class="text-slate-500 dark:text-slate-400">Pipeline</dt>
+            <dd class="font-semibold text-slate-900 dark:text-white">{{ pipeline }}</dd>
+          </div>
+          <div>
+            <dt class="text-slate-500 dark:text-slate-400">Uptime</dt>
+            <dd class="font-semibold text-slate-900 dark:text-white">{{ uptime }}</dd>
+          </div>
+          <div>
+            <dt class="text-slate-500 dark:text-slate-400">Latency (p95)</dt>
+            <dd class="font-semibold text-slate-900 dark:text-white">{{ latency }}</dd>
+          </div>
+        </dl>
+
+        <div class="mt-8 flex items-center gap-3 text-xs">
+          <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="text-slate-500 dark:text-slate-400">
+            Status: <b>{{ statusEmoji }} {{ statusSummary }}</b>
+          </span>
+        </div>
+      </div>
+    </aside>
   </div>
 </section>
