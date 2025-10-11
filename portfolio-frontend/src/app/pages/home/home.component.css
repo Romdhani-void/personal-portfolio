@@ -1,35 +1,13 @@
-/* dotted grid overlay */
-.bg-grid-slate {
-  --c: rgba(100,116,139,0.12); /* slate-500/12 */
-  background-image: radial-gradient(circle at 1px 1px, var(--c) 1px, transparent 0);
-  background-size: 18px 18px;
-  mask-image: linear-gradient(to bottom, black, transparent 92%);
+/* center hero vertically */
+section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* organic gradient blobs */
-@keyframes blob {
-  0%   { transform: translate(0,0) scale(1); }
-  33%  { transform: translate(20px,-30px) scale(1.05); }
-  66%  { transform: translate(-15px,25px) scale(0.98); }
-  100% { transform: translate(0,0) scale(1); }
-}
-.animate-blob { animation: blob 14s ease-in-out infinite; }
-.animation-delay-2000 { animation-delay: 2s; }
-.animation-delay-4000 { animation-delay: 4s; }
-
-/* small pill tags */
-.tag {
-  padding: .25rem .5rem;
-  border-radius: 9999px;
-  background: rgba(148,163,184,.15);
-  border: 1px solid rgba(148,163,184,.35);
-}
-.dark .tag { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); }
-
-/* canvas should not block interactions */
-section > canvas { pointer-events: none; }
-
-/* reduce motion */
-@media (prefers-reduced-motion: reduce) {
-  .animate-blob { animation: none !important; }
+/* keep background + canvas correct */
+section > canvas {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
 }
