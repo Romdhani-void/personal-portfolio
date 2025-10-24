@@ -1,21 +1,27 @@
 <nav
   #navRoot
   class="fixed top-0 left-0 w-full z-50 transition-[background,box-shadow,color] duration-200 ease-out"
-  
   [class.nav--invert]="inverted"
   [style.background]="navBg"
 >
-  <div class="w-full px-6 py-4 grid grid-cols-3 items-center">
-
+  <!-- top row -->
+  <div class="w-full px-6 py-4 grid grid-cols-3 items-center relative z-50">
     <!-- Logo -->
     <div class="flex items-center justify-start">
       <a routerLink="/home">
-        <img src="assets/img/navbar-logo.png" alt="Logo" class="h-12 object-contain" />
+        <img
+          src="assets/img/navbar-logo.png"
+          alt="Logo"
+          class="h-12 object-contain"
+        />
       </a>
     </div>
 
     <!-- Center links (desktop) -->
-    <ul #linkContainer class="hidden md:flex relative justify-center gap-10 font-medium">
+    <ul
+      #linkContainer
+      class="hidden md:flex relative justify-center gap-10 font-medium"
+    >
       <li>
         <a
           #navLink
@@ -23,52 +29,155 @@
           routerLinkActive="router-link-active"
           [routerLinkActiveOptions]="{ exact: true }"
           [ngClass]="baseLinkClasses"
-        >Home</a>
+        >
+          Home
+        </a>
       </li>
 
       <li>
-        <a #navLink routerLink="/about" routerLinkActive="router-link-active" [ngClass]="baseLinkClasses">About</a>
+        <a
+          #navLink
+          routerLink="/about"
+          routerLinkActive="router-link-active"
+          [ngClass]="baseLinkClasses"
+        >
+          About
+        </a>
       </li>
 
       <li>
-        <a #navLink routerLink="/work" routerLinkActive="router-link-active" [ngClass]="baseLinkClasses">Work</a>
+        <a
+          #navLink
+          routerLink="/work"
+          routerLinkActive="router-link-active"
+          [ngClass]="baseLinkClasses"
+        >
+          Work
+        </a>
       </li>
 
       <li>
-        <a #navLink routerLink="/contact" routerLinkActive="router-link-active" [ngClass]="baseLinkClasses">Contact</a>
+        <a
+          #navLink
+          routerLink="/contact"
+          routerLinkActive="router-link-active"
+          [ngClass]="baseLinkClasses"
+        >
+          Contact
+        </a>
       </li>
 
       <!-- Traveling underline (uses CSS var --nav-accent) -->
-      <div #underline class="underline-bar" [class.ready]="ready" [style.transform]="sliderTransform"></div>
+      <div
+        #underline
+        class="underline-bar"
+        [class.ready]="ready"
+        [style.transform]="sliderTransform"
+      ></div>
     </ul>
 
-    <!-- Right social icons -->
+    <!-- Right social icons (desktop only) -->
     <div class="hidden md:flex justify-end gap-4">
-      <a href="https://linkedin.com/in/ton-profile" target="_blank" rel="noopener">
-        <img src="assets/img/linkedin.svg" alt="LinkedIn" class="h-6 hover:scale-110 transition" />
+      <a
+        href="https://linkedin.com/in/ton-profile"
+        target="_blank"
+        rel="noopener"
+      >
+        <img
+          src="assets/img/linkedin.svg"
+          alt="LinkedIn"
+          class="h-6 hover:scale-110 transition"
+        />
       </a>
-      <a href="https://github.com/Romdhani-void" target="_blank" rel="noopener">
-        <img src="assets/img/github.svg" alt="GitHub" class="h-6 hover:scale-110 transition" />
+      <a
+        href="https://github.com/Romdhani-void"
+        target="_blank"
+        rel="noopener"
+      >
+        <img
+          src="assets/img/github.svg"
+          alt="GitHub"
+          class="h-6 hover:scale-110 transition"
+        />
       </a>
     </div>
 
-    <!-- Burger (mobile) -->
+    <!-- Burger (mobile only) -->
     <div class="md:hidden flex justify-end col-span-2">
-      <button (click)="toggleMenu()" class="text-blue-700" aria-label="Toggle menu">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      <button
+        (click)="toggleMenu()"
+        class="text-blue-700 p-2 -mr-2"
+        aria-label="Toggle menu"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-8 w-8"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
         </svg>
       </button>
     </div>
   </div>
 
-  <!-- Mobile dropdown -->
-  <div *ngIf="menuOpen" class="md:hidden px-6 pb-4">
-    <ul class="flex flex-col gap-4 font-medium">
-      <li><a (click)="toggleMenu()" routerLink="/home"  class="font-poppins font-bold">Home</a></li>
-      <li><a (click)="toggleMenu()" routerLink="/work"  class="font-poppins font-bold">Work</a></li>
-      <li><a (click)="toggleMenu()" routerLink="/about" class="font-poppins font-bold">About</a></li>
-      <li><a (click)="toggleMenu()" routerLink="/contact" class="font-poppins font-bold">Contact</a></li>
+  <!-- Mobile dropdown panel -->
+  <div
+    *ngIf="menuOpen"
+    class="
+      md:hidden mobile-menu-panel
+      absolute left-0 right-0 top-full z-40
+      mx-4 mt-2
+      rounded-2xl
+      border border-white/40 shadow-lg
+      bg-white/60 backdrop-blur-lg
+      ring-1 ring-black/5
+      px-4 py-4
+    "
+  >
+    <ul class="flex flex-col gap-1 font-medium text-slate-900">
+      <li>
+        <a
+          (click)="toggleMenu()"
+          routerLink="/home"
+          class="block rounded-lg px-3 py-2 font-poppins font-bold active:bg-slate-900/10 hover:bg-slate-900/5"
+          >Home</a
+        >
+      </li>
+
+      <li>
+        <a
+          (click)="toggleMenu()"
+          routerLink="/work"
+          class="block rounded-lg px-3 py-2 font-poppins font-bold active:bg-slate-900/10 hover:bg-slate-900/5"
+          >Work</a
+        >
+      </li>
+
+      <li>
+        <a
+          (click)="toggleMenu()"
+          routerLink="/about"
+          class="block rounded-lg px-3 py-2 font-poppins font-bold active:bg-slate-900/10 hover:bg-slate-900/5"
+          >About</a
+        >
+      </li>
+
+      <li>
+        <a
+          (click)="toggleMenu()"
+          routerLink="/contact"
+          class="block rounded-lg px-3 py-2 font-poppins font-bold active:bg-slate-900/10 hover:bg-slate-900/5"
+          >Contact</a
+        >
+      </li>
     </ul>
   </div>
 </nav>

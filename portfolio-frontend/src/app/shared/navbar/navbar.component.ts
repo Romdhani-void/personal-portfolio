@@ -40,14 +40,14 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
   menuOpen = false;
 
   // Readability behavior
-  inverted = false;   // true when overlapping a dark section
-  scrolled  = false;  // adds shadow when not at very top
+  inverted = false; // true when overlapping a dark section
+  scrolled = false; // adds shadow when not at very top
   navBg = 'rgba(255,255,255,0)';
 
   // Tuning
   private baseAlphaLight = 0.85; // white alpha over light sections
-  private baseAlphaDark  = 0.60; // dark alpha over dark sections
-  private fadeInDist = 64;       // px to ramp in at page top
+  private baseAlphaDark = 0.6; // dark alpha over dark sections
+  private fadeInDist = 64; // px to ramp in at page top
 
   // Housekeeping
   private onScrollRef = () => this.onScroll();
@@ -57,7 +57,9 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     // Initial underline placement after view is stable
-    const stableSub = this.ngZone.onStable.subscribe(() => this.placeUnderline(true));
+    const stableSub = this.ngZone.onStable.subscribe(() =>
+      this.placeUnderline(true)
+    );
     this.subs.add(stableSub);
 
     // Move underline on route changes
@@ -74,7 +76,9 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
     this.subs.add(routerSub);
 
     // When the list of links changes (e.g., responsive conditions)
-    const linksSub = this.navLinks.changes.subscribe(() => this.placeUnderline());
+    const linksSub = this.navLinks.changes.subscribe(() =>
+      this.placeUnderline()
+    );
     this.subs.add(linksSub);
 
     // After fonts load (widths may change)
@@ -103,7 +107,7 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
   @HostListener('window:resize')
   onResize(): void {
     this.placeUnderline();
-    this.updateInversionByProbe();      // layout changed, re-probe
+    this.updateInversionByProbe(); // layout changed, re-probe
     this.updateBackground(window.scrollY || 0);
   }
 
@@ -111,9 +115,8 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
     this.menuOpen = !this.menuOpen;
   }
 
-  // Keep your Tailwind classes for links here
+  // Tailwind classes for desktop links
   baseLinkClasses: string[] = [
-    // color is controlled by CSS variables in the nav (see CSS)
     'font-bold',
     'font-poppins',
     'transition-colors',
@@ -137,13 +140,18 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
     this.scrolled = y > 0;
   }
 
-  /** Probe the element under the navbar centerline and find a data-theme on it or its ancestors */
+  /**
+   * Probe the element under the navbar centerline
+   * and find a data-theme on it or its ancestors
+   */
   private updateInversionByProbe(): void {
     const navEl = this.navRoot?.nativeElement;
     const probeY = Math.max((navEl?.offsetHeight ?? 64) - 1, 0);
     const centerX = Math.floor(window.innerWidth / 2);
 
-    const el = document.elementFromPoint(centerX, probeY) as HTMLElement | null;
+    const el = document.elementFromPoint(centerX, probeY) as
+      | HTMLElement
+      | null;
     let node: HTMLElement | null = el;
     let theme: 'light' | 'dark' = 'light';
     let steps = 0;
@@ -166,7 +174,7 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
     const a = +(base * ramp).toFixed(3);
 
     this.navBg = this.inverted
-      ? `rgba(15, 23, 42, ${a})`   // slate-900-ish
+      ? `rgba(15, 23, 42, ${a})` // slate-900-ish
       : `rgba(255, 255, 255, ${a})`;
   }
 
@@ -177,7 +185,8 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
     if (!links.length || !container) return;
 
     const active =
-      links.find((a) => a.classList.contains('router-link-active')) ?? links[0];
+      links.find((a) => a.classList.contains('router-link-active')) ??
+      links[0];
     if (!active) return;
 
     const a = active.getBoundingClientRect();

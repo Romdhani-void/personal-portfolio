@@ -22,10 +22,15 @@ nav a[routerLink]:hover {
 }
 
 /* Active link uses accent shade */
-.router-link-active { color: var(--nav-accent) !important; }
+.router-link-active {
+  color: var(--nav-accent) !important;
+}
 
 /* Keep links above the underline */
-a[routerLink] { position: relative; z-index: 1; }
+a[routerLink] {
+  position: relative;
+  z-index: 1;
+}
 
 /* Traveling underline (transform-only) uses --nav-accent */
 .underline-bar {
@@ -51,4 +56,22 @@ a[routerLink] { position: relative; z-index: 1; }
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .underline-bar.ready { transition: none; }
+}
+
+/* ===== Mobile menu panel frosting ===== */
+.mobile-menu-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.mobile-menu-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 20% 0%,
+    rgba(255,255,255,0.6) 0%,
+    rgba(255,255,255,0) 70%
+  );
+  pointer-events: none;
 }
