@@ -39,37 +39,83 @@ export class WorkComponent {
   active: Role = 'all';
 
   readonly projects: Project[] = [
-    { id: 'fs1', title: 'SAFARICA – Tour Booking',
+    {
+      id: 'fs1',
+      title: 'SAFARICA – Tour Booking',
       oneLiner: 'End-to-end booking with catalog, cart, Stripe payments/refunds, and automated emails after payment.',
-      roles: ['fullstack'], tags: ['Angular', 'Node', 'Express', 'MongoDB', 'Stripe', 'Automation'],
-      scope: 'Public app + admin panel', duration: '8 weeks', link: '/projects/safarica', n8n: true },
-    { id: 'fs2', title: 'BarberShop - Booking platform',
+      roles: ['fullstack'],
+      tags: ['Angular', 'Node', 'Express', 'MongoDB', 'Stripe'],
+      scope: 'Public app + admin panel',
+      duration: '8 weeks',
+      link: 'https://github.com/Romdhani-void/safarica-app',
+      isExternal: true,
+      n8n: true
+    },
+    {
+      id: 'fs2',
+      title: 'BarberShop - Booking platform',
       oneLiner: 'Appointments, staff management, and automated SMS confirmations.',
-      roles: ['fullstack'], tags: ['Angular', 'Node', 'Express', 'MongoDB', 'Twilio'],
-      scope: 'Booking + management platform', duration: '6 weeks', link: '/projects/barbershop' },
-    { id: 'fs3', title: 'NutriTracker - Calories Counter',
+      roles: ['fullstack'],
+      tags: ['Angular', 'Node', 'Express', 'MongoDB'],
+      scope: 'Booking + management platform',
+      duration: '6 weeks',
+      link: 'https://github.com/Romdhani-void/barbershop-booking',
+      isExternal: true
+    },
+    {
+      id: 'fs3',
+      title: 'NutriTracker - Calories Counter',
       oneLiner: 'Nutrition & exercise tracker with AI-based calorie estimation from food inputs.',
-      roles: ['fullstack'], tags: ['Angular', 'Node', 'Express', 'MongoDB', 'AI'],
-      scope: 'Health & fitness app', duration: '5 weeks', link: '/projects/calories-counter' },
-    { id: 'fs4', title: 'Artevier - Glazed Ceramics',
+      roles: ['fullstack'],
+      tags: ['Angular', 'Node', 'Express', 'MongoDB'],
+      scope: 'Health & fitness app',
+      duration: '5 weeks',
+      link: 'https://github.com/Romdhani-void/NutriTracker',
+      isExternal: true
+    },
+    {
+      id: 'fs4',
+      title: 'Artevier - Glazed Ceramics',
       oneLiner: 'Web project showcasing glazed ceramics craftsmanship.',
-      roles: ['fullstack'], tags: ['Angular'],
-      scope: 'Portfolio / showcase site', link: 'https://github.com/Romdhani-void/Artevier', isExternal: true },
-
-    { id: 'do3', title: 'NutriTracker - DevOps Hosting',
+      roles: ['fullstack'],
+      tags: ['Angular'],
+      scope: 'Portfolio / showcase site',
+      link: 'https://github.com/Romdhani-void/Artevier',
+      isExternal: true
+    },
+    {
+      id: 'do3',
+      title: 'NutriTracker - DevOps Hosting',
       oneLiner: 'Containerized deployment with CI/CD and monitoring. Video walkthrough included.',
-      roles: ['devops'], tags: ['Docker', 'Kubernetes', 'AWS', 'CI/CD'],
-      metrics: ['Reliable builds'], scope: 'App hosting', duration: '2 weeks',
-      link: '/work/devops-nutritracker', videoLink: '/work/devops-nutritracker' },
-    { id: 'do4', title: 'Full AWS Deployment - Signup Page',
+      roles: ['devops'],
+      tags: ['Docker', 'Kubernetes', 'AWS', 'CI/CD'],
+      metrics: ['Reliable builds'],
+      scope: 'App hosting',
+      duration: '2 weeks',
+      link: '/work/devops-nutritracker',
+      videoLink: '/work/devops-nutritracker'
+    },
+    {
+      id: 'do4',
+      title: 'Full AWS Deployment - Signup Page',
       oneLiner: 'Full AWS deployment pipeline for a signup page project.',
-      roles: ['devops'], tags: ['AWS'],
-      scope: 'Infra + deployment', link: 'https://github.com/Romdhani-void/full-aws-deployment-signup_page', isExternal: true },
-
-    { id: 'ps1', title: 'Armoury Crate Repair Script',
+      roles: ['devops'],
+      tags: ['AWS'],
+      scope: 'Infra + deployment',
+      link: 'https://github.com/Romdhani-void/full-aws-deployment-signup_page',
+      isExternal: true
+    },
+    {
+      id: 'ps1',
+      title: 'Armoury Crate Repair Script',
       oneLiner: 'PowerShell script to fix common Armoury Crate issues on ASUS ROG PCs.',
-      roles: ['scripts'], tags: ['PowerShell', 'Windows', 'ASUS ROG', 'Troubleshooting'],
-      scope: 'Quick fix script', duration: '1 week', link: '/projects/armoury-crate-fix' },
+      roles: ['scripts'],
+      tags: ['PowerShell', 'Windows', 'ASUS ROG', 'Troubleshooting'],
+      scope: 'Quick fix script',
+      duration: '1 week',
+      link: 'https://github.com/Romdhani-void/crystal-clear-asus',
+      isExternal: true
+    },
   ];
 
   get filtered(): Project[] {
