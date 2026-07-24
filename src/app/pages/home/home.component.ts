@@ -26,7 +26,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   pipeline = 'Build · Test · Deploy (main branch)';
   uptime = '99.98%';
   latency = '142 ms';
-  statusSummary = 'Stable — auto-deploys on push';
+  statusSummary = 'Stable auto-deploys on push';
   statusEmoji = '✅';
   get statusText() { return 'Healthy'; }
   get statusPillClass() {
