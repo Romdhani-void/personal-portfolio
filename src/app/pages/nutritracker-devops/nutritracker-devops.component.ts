@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 
@@ -39,10 +39,31 @@ interface DevopsSection {
   templateUrl: './nutritracker-devops.component.html',
   styleUrls: ['./nutritracker-devops.component.css']
 })
-export class NutritrackerDevopsComponent {
+export class NutritrackerDevopsComponent implements AfterViewInit {
   @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
 
   constructor(private location: Location) {}
+
+  ngAfterViewInit(): void {
+    this.applyDefaultVolume();
+  }
+
+  /**
+   * Sets default video volume to 30% (0.3).
+   * Call this on (loadedmetadata) in HTML to handle switching video sections.
+   */
+  setInitialVolume(event: Event): void {
+    const video = event.target as HTMLVideoElement;
+    if (video) {
+      video.volume = 0.3;
+    }
+  }
+
+  private applyDefaultVolume(): void {
+    if (this.videoPlayer?.nativeElement) {
+      this.videoPlayer.nativeElement.volume = 0.3;
+    }
+  }
 
   goBack() {
     this.location.back();
