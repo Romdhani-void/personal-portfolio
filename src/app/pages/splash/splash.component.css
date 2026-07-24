@@ -1,0 +1,54 @@
+:host { display: block; }
+
+/* Fullscreen white background */
+.splash {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  display: grid;
+  place-items: center;
+  z-index: 9999;
+  opacity: 0;
+  animation: splashFadeIn 300ms ease-out forwards;
+}
+
+/* Fade-out layer when exiting */
+.splash--exit {
+  animation: splashFadeOut 400ms ease-in forwards;
+}
+
+/* Big logo with continuous slow zoom in/out */
+.logo {
+  width: min(92vw, 480px);
+  height: auto;
+  animation:
+    logoFadeIn 500ms ease-out forwards,
+    slowZoom 4s ease-in-out infinite; /* keeps zooming while visible */
+  animation-delay: 100ms, 0s; /* fadeIn starts after 100ms, zoom starts immediately */
+}
+
+/* Background fade animations */
+@keyframes splashFadeIn { to { opacity: 1; } }
+@keyframes splashFadeOut { to { opacity: 0; } }
+
+/* Logo fade in */
+@keyframes logoFadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Gentle breathing zoom effect */
+@keyframes slowZoom {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+/* Accessibility: no motion */
+@media (prefers-reduced-motion: reduce) {
+  .splash, .splash--exit, .logo {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: scale(1) !important;
+  }
+}

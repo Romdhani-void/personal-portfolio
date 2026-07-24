@@ -1,0 +1,17 @@
+:host {
+  display: block;
+}
+
+/* rose accent for inputs and textarea caret */
+input,
+textarea {
+  caret-color: #E11D48;
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .transition,
+  .transition-transform {
+    transition: none !important;
+  }
+}

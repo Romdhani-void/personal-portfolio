@@ -1,0 +1,13 @@
+/* center hero vertically */
+section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* keep background + canvas correct */
+section > canvas {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}

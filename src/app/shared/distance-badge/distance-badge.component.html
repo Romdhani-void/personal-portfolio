@@ -1,0 +1,22 @@
+<ng-container *ngIf="!hidden()">
+  <div class="card">
+    <div class="card-head">
+      <div class="head-left">
+        <span class="dot" aria-hidden="true"></span>
+        <h3>Route to {{ cityLabel }}</h3>
+      </div>
+      <p class="greet" *ngIf="greeting()">{{ greeting() }}</p>
+    </div>
+
+    <p class="distance" *ngIf="distanceKm() !== null">
+      You’re ~{{ distanceKm() | number:'1.0-0' }} km from me
+    </p>
+
+    <div
+      id="distanceMap"
+      class="map"
+      role="img"
+      [attr.aria-label]="'Map showing route from your location to ' + cityLabel">
+    </div>
+  </div>
+</ng-container>
