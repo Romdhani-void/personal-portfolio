@@ -1,5 +1,9 @@
 {
-  "routes": [
-    { "src": "/(.*)", "dest": "/index.html" }
+  "outputDirectory": "dist/portfolio-frontend/browser",
+  "rewrites": [
+    {
+      "source": "/((?!.*\\.).*)",
+      "destination": "/index.html"
+    }
   ]
 }
