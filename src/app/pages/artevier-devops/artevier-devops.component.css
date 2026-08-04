@@ -1,8 +1,6 @@
-/* ---- shared accent ---- */
 :host {
   --accent: #1D4ED8;
   --accent-rgb: 29, 78, 216;
-  --loom-blue: #1a73e8; /* timestamp blue */
 }
 
 .back-btn:hover {
@@ -11,7 +9,11 @@
   color: var(--accent);
 }
 
-/* Top tabs */
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .tab-item {
   color: #64748b;
   border-bottom: 2px solid transparent;
@@ -22,42 +24,6 @@
 .tab-item--active {
   color: var(--accent);
   border-bottom: 2px solid var(--accent);
-}
-
-/* Cards */
-.loom-card,
-.summary-panel {
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.05);
-}
-
-.video-frame {
-  box-shadow: inset 0 0 0 1px rgba(var(--accent-rgb), .15);
-}
-
-.reaction {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 2.25rem;
-  width: 2.25rem;
-  border-radius: 9999px;
-  border: 1px solid #e2e8f0;
-  font-size: 1rem;
-  background: #fff;
-}
-
-/* Timestamps in blue */
-.chapter-time {
-  color: var(--loom-blue);
-  background: rgba(26, 115, 232, 0.08);
-}
-
-/* Scrollbar for summary panel */
-.summary-panel::-webkit-scrollbar { width: 6px; }
-.summary-panel::-webkit-scrollbar-thumb {
-  background-color: rgba(var(--accent-rgb), .35);
-  border-radius: 9999px;
 }
 
 /* ---- Article step-card mode ---- */
@@ -108,13 +74,13 @@
   color: var(--accent);
 }
 
-/* ---- Beautiful macOS Code Blocks ---- */
+/* ---- macOS-style code blocks ---- */
 .code-block-wrapper {
   margin-top: 1rem;
   margin-bottom: 0.75rem;
   border-radius: 8px;
   overflow: hidden;
-  background-color: #0f172a; /* Tailwind slate-900 */
+  background-color: #0f172a;
   border: 1px solid #334155;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
@@ -147,9 +113,9 @@
   color: #e2e8f0;
 }
 
-/* Color highlights for professional impact injected dynamically */
+/* Color highlights injected via [innerHTML] */
 ::ng-deep .highlight-action {
-  color: var(--loom-blue);
+  color: #2563eb;
   font-weight: 600;
 }
 

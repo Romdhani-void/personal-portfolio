@@ -17,4 +17,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/nutritracker-devops/nutritracker-devops.component').then(m => m.NutritrackerDevopsComponent)
   },
+  {
+    path: 'work/devops-artevier',
+    loadComponent: () =>
+      import('./pages/artevier-devops/artevier-devops.component').then(m => m.ArtevierDevopsComponent)
+  },
 ];

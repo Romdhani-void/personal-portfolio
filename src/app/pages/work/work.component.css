@@ -1,7 +1,7 @@
-/* ---- shared accent ---- */
+/* ---- shared accent (matches About page) ---- */
 :host {
-  --accent: #E11D48;            /* rose-600 */
-  --accent-rgb: 225, 29, 72;
+  --accent: #1D4ED8;            /* blue-700, same as About page */
+  --accent-rgb: 29, 78, 216;
 }
 
 /* Vertical centering helper */
@@ -36,6 +36,32 @@ article.group:hover .auto-corner { transform: translateY(-1px); box-shadow: 0 4p
 @media (prefers-reduced-motion: reduce) { article.group:hover .auto-corner { transform: none; } }
 @media (forced-colors: active) { .auto-corner { border-color: CanvasText; } }
 
+/* DevOps badge (top-right corner): gradient infinity icon + wordmark, unchanged */
+.devops-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #fff;
+  color: #1e293b;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  padding: 3px 8px 3px 6px;
+  border-radius: 9999px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.devops-badge-icon {
+  height: 10px;
+  width: 20px;
+  display: block;
+}
+
 /* ------- accent replacements ------- */
 .filter-btn {
   padding: .5rem 1rem; border-radius: 9999px; font-weight: 700; font-size: .875rem;
@@ -49,7 +75,7 @@ article.group:hover .auto-corner { transform: translateY(-1px); box-shadow: 0 4p
 }
 .filter-btn.is-active:hover { background: var(--accent); color:#fff; }
 
-/* card accent gradient (rose) */
+/* card accent gradient (blue) */
 .accent-grad {
   background-image:
     linear-gradient(to bottom right,
@@ -67,7 +93,7 @@ article.group:hover .auto-corner { transform: translateY(-1px); box-shadow: 0 4p
     );
 }
 
-/* sticker “Video available” */
+/* sticker "Video available" */
 .video-badge {
   background: var(--accent); color:#fff;
 }

@@ -53,6 +53,20 @@
             </svg>
           </div>
 
+          <!-- DevOps badge (top-right corner) -->
+          <div *ngIf="p.roles?.includes('devops')" class="devops-badge" aria-hidden="true">
+            <svg viewBox="0 0 640 512" class="devops-badge-icon" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="devopsGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#EC0C8C"/>
+                  <stop offset="100%" stop-color="#5B21F2"/>
+                </linearGradient>
+              </defs>
+              <path fill="url(#devopsGradient)" d="M484.4 96C407 96 349.2 164.2 320 208.2 290.8 164.2 233 96 155.6 96 69.75 96 0 165.7 0 251.6S69.75 407.2 155.6 407.2c77.4 0 135.2-68.2 164.4-112.2 29.2 44 87 112.2 164.4 112.2 85.85 0 155.6-69.75 155.6-155.6S570.25 96 484.4 96zM155.6 353.2c-56.1 0-101.6-45.5-101.6-101.6S99.5 150 155.6 150c48.4 0 92.9 55.3 118.5 101.6-25.6 46.3-70.1 101.6-118.5 101.6zm328.8 0c-48.4 0-92.9-55.3-118.5-101.6C391.5 205.3 436 150 484.4 150c56.1 0 101.6 45.5 101.6 101.6S540.5 353.2 484.4 353.2z"/>
+            </svg>
+            <span>DevOps</span>
+          </div>
+
           <!-- Inner surface -->
           <div class="relative z-0 rounded-2xl bg-white bg-opacity-90 p-4 h-full shadow-sm hover:shadow-md transition">
             <!-- Header row -->
@@ -83,11 +97,16 @@
               </div>
             </ng-container>
 
-            <!-- Tags -->
-            <div class="mt-3 flex flex-wrap justify-center gap-1.5" aria-label="Tags">
-              <span *ngFor="let t of p.tags" class="px-2 py-0.5 rounded-full text-[10px] bg-gray-100 text-gray-700 border border-gray-200">
-                {{ t }}
-              </span>
+            <!-- Tags / Tech logos -->
+            <div class="mt-3 flex flex-wrap justify-center items-center gap-1.5" aria-label="Tech stack">
+              <ng-container *ngIf="p.techIcons; else textTags">
+                <app-tech-icon *ngFor="let icon of p.techIcons" [name]="icon"></app-tech-icon>
+              </ng-container>
+              <ng-template #textTags>
+                <span *ngFor="let t of p.tags" class="px-2 py-0.5 rounded-full text-[10px] bg-gray-100 text-gray-700 border border-gray-200">
+                  {{ t }}
+                </span>
+              </ng-template>
             </div>
 
             <!-- Footer -->

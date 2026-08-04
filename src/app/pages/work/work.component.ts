@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
+import { TechIconComponent, TechIconName } from '../../shared/tech-icon/tech-icon.component';
 
 type Role = 'all' | 'fullstack' | 'devops' | 'scripts';
 
@@ -11,6 +12,7 @@ interface Project {
   oneLiner: string;
   roles: Role[];
   tags: string[];
+  techIcons?: TechIconName[];
   metrics?: string[];
   scope?: string;
   duration?: string;
@@ -24,7 +26,7 @@ interface Project {
 @Component({
   selector: 'app-work',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, RouterModule],
+  imports: [CommonModule, NavbarComponent, RouterModule, TechIconComponent],
   templateUrl: './work.component.html',
   styleUrls: ['./work.component.css'],
 })
@@ -88,12 +90,24 @@ export class WorkComponent {
       title: 'NutriTracker - DevOps Hosting',
       oneLiner: 'Containerized deployment with CI/CD and monitoring. Video walkthrough included.',
       roles: ['devops'],
-      tags: ['Docker', 'Kubernetes', 'AWS', 'CI/CD'],
+      tags: ['Docker', 'Kubernetes', 'Terraform', 'AWS', 'CI/CD', 'Helm'],
+      techIcons: ['docker', 'kubernetes', 'terraform', 'aws', 'cicd', 'Helm'],
       metrics: ['Reliable builds'],
       scope: 'App hosting',
       duration: '2 weeks',
       link: '/work/devops-nutritracker',
       videoLink: '/work/devops-nutritracker'
+    },
+    {
+      id: 'do5',
+      title: 'Artevier - DevOps Hosting',
+      oneLiner: 'Containerized deployment on AWS EKS with a Jenkins CI/CD pipeline and monitoring.',
+      roles: ['devops'],
+      tags: ['Docker', 'Kubernetes', 'Terraform', 'AWS', 'Jenkins', 'Helm'],
+      techIcons: ['docker', 'kubernetes', 'terraform', 'aws', 'jenkins', 'Helm'],
+      metrics: ['Reliable builds'],
+      scope: 'App hosting',
+      link: '/work/devops-artevier'
     },
     {
       id: 'do4',
