@@ -90,7 +90,7 @@ export class NutritrackerDevopsComponent implements AfterViewInit {
       key: 'overview',
       label: 'Project Overview',
       videoTitle: 'NutriTracker Architecture and Deployment Overview',
-      videoSrc: 'assets/videos/nutritracker-overview.mp4',
+      videoSrc: 'assets/video/nutritracker-overview.mp4',
       duration: '8:00',
       overview: 'NutriTracker is a nutrition tracking application built with a microservice backend, an Angular frontend, and AWS-based infrastructure. The project emphasizes containerization, infrastructure as code, Kubernetes deployment, CI/CD automation, and monitoring to demonstrate a modern cloud-native delivery workflow.',
       chapters: [
@@ -108,7 +108,7 @@ export class NutritrackerDevopsComponent implements AfterViewInit {
       key: 'docker',
       label: 'Docker',
       videoTitle: 'NutriTracker – Docker',
-      videoSrc: 'assets/videos/nutritracker-docker.mp4',
+      videoSrc: 'assets/video/nutritracker-docker.mp4',
       duration: '',
       overview: 'Walkthrough of containerizing NutriTracker, building separate images for the backend services and frontend, wiring them together with Docker Compose, and setting up Mongo and environment variables.',
       chapters: [
@@ -123,7 +123,7 @@ export class NutritrackerDevopsComponent implements AfterViewInit {
       key: 'iac-network',
       label: 'IaC – Network',
       videoTitle: 'NutriTracker – Infrastructure as Code: Network',
-      videoSrc: 'assets/videos/nutritracker-iac.mp4',
+      videoSrc: 'assets/video/nutritracker-iac.mp4',
       duration: '',
       overview: 'Automating the AWS networking foundation for the EKS cluster with Terraform, a repeatable, version-controlled VPC design built for high availability and security.',
       chapters: [
@@ -187,7 +187,7 @@ export class NutritrackerDevopsComponent implements AfterViewInit {
       key: 'iac-iam-eks',
       label: 'IaC – IAM & EKS',
       videoTitle: 'NutriTracker – Infrastructure as Code: IAM and EKS',
-      videoSrc: 'assets/videos/nutritracker-iac-iam-eks.mp4',
+      videoSrc: 'assets/video/nutritracker-iac-iam-eks.mp4',
       duration: '',
       overview: 'Setting up IAM roles, OIDC trust, and workload permissions so the EKS cluster and its add-ons can securely access AWS services.',
       chapters: [
@@ -265,7 +265,7 @@ export class NutritrackerDevopsComponent implements AfterViewInit {
       key: 'helm-deployment',
       label: 'Helm and Deployment',
       videoTitle: 'NutriTracker – Helm and Deployment',
-      videoSrc: 'assets/videos/nutritracker-helm-deployment.mp4',
+      videoSrc: 'assets/video/nutritracker-helm-deployment.mp4',
       duration: '',
       overview: 'Deploying and validating NutriTracker on EKS end to end, from provisioning infrastructure to a working public-facing application in the browser.',
       chapters: [

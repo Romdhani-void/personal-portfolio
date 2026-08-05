@@ -24,9 +24,9 @@ interface Language {
 export class AboutComponent {
   name = 'Romdhani, Mohamed Ali';
   pronouns = 'he/him';
-  title = 'Subject Matter Expert';
+  title = 'Subject Matter Expert - French client';
   gradYear = 2025;
-  location = 'Budapest, Hungary';
+  location = 'Hungary';
   currentEmployer = 'Tata Consultancy Services';
   linkedin = 'romdhani-mohamed-ali-5389aa183';
 
@@ -39,7 +39,7 @@ export class AboutComponent {
 
   stackGroups: StackGroup[] = [
     { title: 'Web Dev', items: ['Angular', 'TypeScript', 'Node.js', 'MongoDB'], fallbackIcon: '⚙️' },
-    { title: 'DevOps', items: ['Docker', 'GitHub Actions', 'Terraform', 'Kubernetes', 'Helm', 'Grafana'], fallbackIcon: '⚙️' },
+    { title: 'DevOps', items: ['Docker', 'GitHub Actions', 'Jenkins', 'Terraform', 'Kubernetes', 'Helm', 'Grafana'], fallbackIcon: '⚙️' },
     { title: 'Cloud Provider', items: ['AWS'], fallbackIcon: '☁️' },
   ];
 
@@ -51,6 +51,7 @@ export class AboutComponent {
     'MongoDB': 'mongodb',
     'Docker': 'docker',
     'GitHub Actions': 'githubactions',
+    'Jenkins': 'jenkins',
     'Terraform': 'terraform',
     'Kubernetes': 'kubernetes',
     'Helm': 'helm',
