@@ -107,17 +107,18 @@ export class WorkComponent {
       techIcons: ['docker', 'kubernetes', 'terraform', 'aws', 'jenkins', 'Helm'],
       metrics: ['Reliable builds'],
       scope: 'App hosting',
-      link: '/work/devops-artevier'
+      link: '/work/devops-artevier',
+      videoLink: '/work/devops-artevier'
     },
     {
-      id: 'do4',
-      title: 'Full AWS Deployment - Signup Page',
-      oneLiner: 'Full AWS deployment pipeline for a signup page project.',
+      id: 'grapheme',
+      title: 'Graph Me - VS Extension',
+      oneLiner: 'VS Code extension that reads your YAML, graphs your infrastructure, watches live resources, surfaces issues in the graph, and suggests fixes. Still on my desk — active development.',
       roles: ['devops'],
-      tags: ['AWS'],
-      scope: 'Infra + deployment',
-      link: 'https://github.com/Romdhani-void/full-aws-deployment-signup_page',
-      isExternal: true
+      tags: ['TypeScript', 'VS Code Extension', 'YAML', 'Graph Visualization', 'Kubernetes', 'AWS'],
+      scope: 'Developer tooling / infra visualization',
+      link: '#',
+      isExternal: false
     },
     {
       id: 'ps1',
