@@ -119,7 +119,8 @@
             <img
               [src]="block.image"
               [alt]="block.heading"
-              class="w-full rounded-xl border border-slate-200" />
+              class="w-full rounded-xl border border-slate-200"
+              [class.homepage-img]="block.id === 'intro'" />
             <figcaption *ngIf="block.imageCaption" class="text-xs text-slate-400 mt-2 text-center">
               {{ block.imageCaption }}
             </figcaption>
@@ -204,7 +205,8 @@
             <img
               [src]="block.image"
               [alt]="block.heading"
-              class="w-full rounded-xl border border-slate-200" />
+              class="w-full rounded-xl border border-slate-200"
+              [class.homepage-img]="block.id === 'intro'" />
             <figcaption *ngIf="block.imageCaption" class="text-xs text-slate-400 mt-2 text-center">
               {{ block.imageCaption }}
             </figcaption>

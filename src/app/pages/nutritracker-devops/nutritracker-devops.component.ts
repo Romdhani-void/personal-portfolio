@@ -90,18 +90,43 @@ export class NutritrackerDevopsComponent implements AfterViewInit {
       key: 'overview',
       label: 'Project Overview',
       videoTitle: 'NutriTracker Architecture and Deployment Overview',
-      videoSrc: 'assets/video/nutritracker-overview.mp4',
+      videoSrc: '',
       duration: '8:00',
-      overview: 'NutriTracker is a nutrition tracking application built with a microservice backend, an Angular frontend, and AWS-based infrastructure. The project emphasizes containerization, infrastructure as code, Kubernetes deployment, CI/CD automation, and monitoring to demonstrate a modern cloud-native delivery workflow.',
-      chapters: [
-        { label: 'Project Goals', time: 15, image: this.img('overview', 1), description: '' },
-        { label: 'Microservice Architecture', time: 124, image: this.img('overview', 2), description: '' },
-        { label: 'Frontend and Local Development Setup', time: 194, image: this.img('overview', 3), description: '' },
-        { label: 'Containerization and Image Publishing', time: 223, image: this.img('overview', 4), description: '' },
-        { label: 'Infrastructure as Code with Terraform', time: 261, image: this.img('overview', 5), description: '' },
-        { label: 'Kubernetes, Load Balancing, and Public Access', time: 336, image: this.img('overview', 6), description: '' },
-        { label: 'CI/CD Automation', time: 398, image: this.img('overview', 7), description: '' },
-        { label: 'Monitoring and Next Steps', time: 438, image: this.img('overview', 8), description: '' },
+      overview: '',
+      chapters: [],
+      isArticle: true,
+      articleReadTime: '3 min read',
+      articleBlocks: [
+        {
+          id: 'intro',
+          heading: 'What NutriTracker Is',
+          image: 'assets/img/nutritracker-devops/homepage.jpg',
+          imageCaption: 'NutriTracker application homepage',
+          paragraphs: [
+            'NutriTracker is a nutrition tracking application that lets users log daily meals, set nutrition goals, and follow their progress over time. It pairs a clean Angular frontend with a microservice backend and a fully automated AWS delivery pipeline.',
+            'Beyond the product itself, the project is a hands-on showcase of modern DevOps: containerization, infrastructure as code, Kubernetes, CI/CD, and live monitoring.',
+          ]
+        },
+        {
+          id: 'architecture-and-infra',
+          heading: 'Architecture, Containers & Infrastructure',
+          image: this.img('overview', 2),
+          imageCaption: 'NutriTracker microservices, Docker, and Terraform foundation',
+          paragraphs: [
+            'The app is built as independently deployable microservices (users, goals, daily logs) behind an API layer, with an Angular frontend consuming them. Each service is containerized with Docker and published to Amazon ECR as immutable, versioned images.',
+            'A shared Docker Compose setup runs the full stack locally, while the entire AWS foundation, including the VPC, networking, IAM, and EKS, is provisioned with Terraform as repeatable, version-controlled code.',
+          ]
+        },
+        {
+          id: 'deploy-monitor',
+          heading: 'Kubernetes, CI/CD & Monitoring',
+          image: this.img('overview', 7),
+          imageCaption: 'NutriTracker EKS, automated pipeline, and Grafana telemetry',
+          paragraphs: [
+            'Workloads run on Amazon EKS and are exposed through an AWS Application Load Balancer, giving scheduling, scaling, and self-healing out of the box. GitHub Actions automates the whole release: every push builds images, provisions infrastructure, deploys with Helm, and verifies the rollout.',
+            'Prometheus and Grafana provide real-time telemetry across the microservices, surfacing request rates, errors, and latency. Autoscaling and tighter alerting are the next steps.',
+          ]
+        },
       ]
     },
     {
