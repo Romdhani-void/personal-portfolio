@@ -21,6 +21,7 @@ interface Project {
   blogLink?: string;
   videoLink?: string;
   n8n?: boolean; // optional automation badge
+  isWip?: boolean; // work in progress flag
 }
 
 @Component({
@@ -39,6 +40,7 @@ export class WorkComponent {
   ];
 
   active: Role = 'all';
+  showWipModal = false;
 
   readonly projects: Project[] = [
     {
@@ -115,10 +117,11 @@ export class WorkComponent {
       title: 'Graph Me - VS Extension',
       oneLiner: 'VS Code extension that reads your YAML, graphs your infrastructure, watches live resources, surfaces issues in the graph, and suggests fixes. Still on my desk — active development.',
       roles: ['devops'],
-      tags: ['TypeScript', 'VS Code Extension', 'YAML', 'Graph Visualization', 'Kubernetes', 'AWS'],
+      tags: ['TypeScript', 'VS Code Extension', 'Graph Visualization'],
       scope: 'Developer tooling / infra visualization',
       link: '#',
-      isExternal: false
+      isExternal: false,
+      isWip: true
     },
     {
       id: 'ps1',
@@ -143,4 +146,7 @@ export class WorkComponent {
   trackById = (_: number, p: Project) => p.id;
   isscripts(p: Project): boolean { return p.roles.includes('scripts'); }
   getPrimaryLink(p: Project): string | null { return p.link || p.blogLink || null; }
+
+  openWipModal() { this.showWipModal = true; }
+  closeWipModal() { this.showWipModal = false; }
 }

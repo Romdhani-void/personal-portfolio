@@ -30,7 +30,8 @@
   <div [ngClass]="active === 'all' ? 'mt-10 min-h-55vh flex items-center justify-center' : 'mt-6'">
     <ul class="flex flex-wrap justify-center gap-5" role="list" aria-label="Projects">
       <li *ngFor="let p of filtered; trackBy: trackById" class="w-full sm:w-72 md:w-80 xl:w-80" role="listitem">
-        <article class="group relative overflow-visible rounded-2xl p-0.5 accent-grad transition">
+        <article class="group relative overflow-visible rounded-2xl p-0.5 accent-grad transition"
+                 [class.wip-card]="p.isWip">
           <!-- Sticker (DevOps in All with video) -->
           <div
             *ngIf="(active === 'all' || active === 'devops') && p.roles?.includes('devops') && p.videoLink"
@@ -41,6 +42,12 @@
                           font-bold px-3 py-1 shadow-md ring-2 ring-white">
               Video available
             </span>
+          </div>
+
+          <!-- WIP badge -->
+          <div *ngIf="p.isWip" class="wip-badge" aria-label="Work in progress">
+            <span class="wip-dot"></span>
+            <span>On My Desk</span>
           </div>
 
           <!-- Minimal automation corner (n8n) -->
@@ -54,7 +61,7 @@
           </div>
 
           <!-- DevOps badge (top-right corner) -->
-          <div *ngIf="p.roles?.includes('devops')" class="devops-badge" aria-hidden="true">
+          <div *ngIf="p.roles?.includes('devops') && !p.isWip" class="devops-badge" aria-hidden="true">
             <svg viewBox="0 0 640 512" class="devops-badge-icon" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="devopsGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -117,8 +124,16 @@
               </span>
 
               <div class="ml-auto">
+                <!-- WIP button -->
+                <button *ngIf="p.isWip"
+                        type="button"
+                        (click)="openWipModal()"
+                        class="inline-flex items-center gap-1 rounded-full wip-btn px-3 py-1 text-[11px] font-semibold">
+                  Still on My Desk
+                </button>
+
                 <!-- Read Thread if present -->
-                <a *ngIf="p.videoLink; else detailsBtn"
+                <a *ngIf="!p.isWip && p.videoLink; else detailsBtn"
                    [routerLink]="p.videoLink"
                    class="inline-flex items-center gap-1 rounded-full btn-accent px-3 py-1 text-[11px] font-semibold">
                   Read Thread
@@ -126,7 +141,7 @@
 
                 <!-- Otherwise View Details -->
                 <ng-template #detailsBtn>
-                  <a *ngIf="getPrimaryLink(p) as href"
+                  <a *ngIf="!p.isWip && getPrimaryLink(p) as href"
                      [href]="href" [attr.target]="p.isExternal ? '_blank' : null"
                      [attr.rel]="p.isExternal ? 'noopener noreferrer' : null"
                      class="inline-flex items-center gap-1 rounded-full border border-gray-300 bg-white
@@ -142,3 +157,32 @@
     </ul>
   </div>
 </section>
+
+<!-- WIP Modal -->
+<div *ngIf="showWipModal"
+     class="modal-overlay"
+     (click)="closeWipModal()"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="wip-modal-title">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <span class="wip-badge-lg">
+        <span class="wip-dot"></span>
+        In Development
+      </span>
+      <button type="button" class="modal-close" (click)="closeWipModal()" aria-label="Close">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+    <h3 id="wip-modal-title" class="modal-title">This project is still on my desk</h3>
+    <p class="modal-message">
+      Graph Me is actively in development — I'm building it out feature by feature.
+      Check back soon for the full release with live infrastructure visualization,
+      resource watching, and smart fix suggestions.
+    </p>
+    <button type="button" class="modal-ok-btn" (click)="closeWipModal()">Got it</button>
+  </div>
+</div>
