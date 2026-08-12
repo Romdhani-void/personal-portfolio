@@ -132,7 +132,7 @@ export class NutritrackerDevopsComponent implements AfterViewInit {
     {
       key: 'docker',
       label: 'Docker',
-      videoTitle: 'NutriTracker – Docker',
+      videoTitle: 'NutriTracker: Docker',
       videoSrc: 'assets/video/nutritracker-docker.mp4',
       duration: '',
       overview: 'Walkthrough of containerizing NutriTracker, building separate images for the backend services and frontend, wiring them together with Docker Compose, and setting up Mongo and environment variables.',
@@ -146,8 +146,8 @@ export class NutritrackerDevopsComponent implements AfterViewInit {
     },
     {
       key: 'iac-network',
-      label: 'IaC – Network',
-      videoTitle: 'NutriTracker – Infrastructure as Code: Network',
+      label: 'IaC: Network',
+      videoTitle: 'NutriTracker Infrastructure as Code: Network',
       videoSrc: 'assets/video/nutritracker-iac.mp4',
       duration: '',
       overview: 'Automating the AWS networking foundation for the EKS cluster with Terraform, a repeatable, version-controlled VPC design built for high availability and security.',
@@ -210,8 +210,8 @@ export class NutritrackerDevopsComponent implements AfterViewInit {
     },
     {
       key: 'iac-iam-eks',
-      label: 'IaC – IAM & EKS',
-      videoTitle: 'NutriTracker – Infrastructure as Code: IAM and EKS',
+      label: 'IaC: IAM & EKS',
+      videoTitle: 'NutriTracker Infrastructure as Code: IAM and EKS',
       videoSrc: 'assets/video/nutritracker-iac-iam-eks.mp4',
       duration: '',
       overview: 'Setting up IAM roles, OIDC trust, and workload permissions so the EKS cluster and its add-ons can securely access AWS services.',
@@ -289,7 +289,7 @@ export class NutritrackerDevopsComponent implements AfterViewInit {
     {
       key: 'helm-deployment',
       label: 'Helm and Deployment',
-      videoTitle: 'NutriTracker – Helm and Deployment',
+      videoTitle: 'NutriTracker: Helm and Deployment',
       videoSrc: 'assets/video/nutritracker-helm-deployment.mp4',
       duration: '',
       overview: 'Deploying and validating NutriTracker on EKS end to end, from provisioning infrastructure to a working public-facing application in the browser.',
@@ -366,7 +366,7 @@ export class NutritrackerDevopsComponent implements AfterViewInit {
     {
       key: 'monitoring',
       label: 'Monitoring (Grafana)',
-      videoTitle: 'NutriTracker – Monitoring with Grafana',
+      videoTitle: 'NutriTracker: Monitoring with Grafana',
       videoSrc: '',
       duration: '',
       overview: 'Full setup of application telemetry, Prometheus target discovery, and Grafana dashboard visualization across NutriTracker EKS microservices.',
@@ -457,7 +457,7 @@ sum(rate(http_request_duration_seconds_count[1m])) by (pod)`
     {
       key: 'cicd',
       label: 'CI/CD (GitHub Actions)',
-      videoTitle: 'NutriTracker – CI/CD Pipeline',
+      videoTitle: 'NutriTracker: CI/CD Pipeline',
       videoSrc: '',
       duration: '',
       overview: 'In earlier videos, I demonstrated the manual process: running terraform apply, building the EKS cluster, configuring OIDC and IRSA, deploying the AWS Load Balancer Controller and External Secrets Operator (ESO), installing the Helm charts, grabbing the ALB address, and checking the live app. This CI/CD pipeline was built to completely automate that exact workflow.',

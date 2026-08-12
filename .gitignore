@@ -16,6 +16,8 @@ dist
 npm-debug.log
 yarn-error.log
 
+
+all_files_clean.txt
 # IDEs and editors
 .idea/
 .project

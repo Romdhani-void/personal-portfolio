@@ -17,7 +17,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   @ViewChild('snowCanvas', { static: true  }) snowCanvas!: ElementRef<HTMLCanvasElement>;
 
   // ====== Content / UI ======
-  roles = ['DevOps Engineer', 'Subject Matter Expert', 'Full-Stack MEAN'];
+  roles = ['AWS DevOps Engineer', 'Subject Matter Expert'];
   currentRole = this.roles[0];
   private roleIdx = 0;
   private roleTimer: any;

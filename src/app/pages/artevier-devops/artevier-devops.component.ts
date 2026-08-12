@@ -65,7 +65,7 @@ export class ArtevierDevopsComponent {
             'The storefront supports three languages (<span class="highlight-tech">English</span>, <span class="highlight-tech">French</span>, <span class="highlight-tech">Hungarian</span>) and two currencies (<span class="highlight-action">EUR</span>, <span class="highlight-action">HUF</span>) with role-based access separating regular customers from admin users.',
           ],
           image: 'assets/img/artevier/frontend.jpg',
-          imageCaption: 'Artisan Sink Studio – live storefront landing page',
+          imageCaption: 'Artisan Sink Studio: live storefront landing page',
         },
         {
           id: 'microservice-architecture',
@@ -115,7 +115,7 @@ Notification Service    notificationdb`,
     {
       key: 'docker',
       label: 'Docker',
-      pageTitle: 'Artevier – Docker',
+      pageTitle: 'Artevier: Docker',
       articleReadTime: '4 min read',
       articleBlocks: [
         {
@@ -206,8 +206,8 @@ FROM_EMAIL=noreply@artisansinkstudio.com`,
     },
     {
       key: 'iac',
-      label: 'IaC – Terraform',
-      pageTitle: 'Artevier – Infrastructure as Code',
+      label: 'IaC: Terraform',
+      pageTitle: 'Artevier: Infrastructure as Code',
       articleReadTime: '7 min read',
       articleBlocks: [
         {
@@ -221,7 +221,7 @@ FROM_EMAIL=noreply@artisansinkstudio.com`,
           ],
           image: 'assets/img/artevier/aws-network-architecture.png',
           imageCaption:
-            'Artevier – multi-AZ AWS architecture (VPC, EKS, MongoDB replica set, ECR)',
+            'Artevier: multi-AZ AWS architecture (VPC, EKS, MongoDB replica set, ECR)',
           codeBlock: `VPC                       10.0.0.0/16          eu-west-3 (Paris)
 
 Availability Zone         Public Subnet    Private App Subnet    Database Subnet
@@ -314,7 +314,7 @@ external-secrets-role                  Custom: secretsmanager:GetSecretValue,
     {
       key: 'kubernetes',
       label: 'Kubernetes & Helm',
-      pageTitle: 'Artevier – Kubernetes Deployment',
+      pageTitle: 'Artevier: Kubernetes Deployment',
       articleReadTime: '9 min read',
       articleBlocks: [
         {
@@ -370,7 +370,7 @@ helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-contro
           ],
           image:
             'assets/img/artevier/kubectl_get_pods_-n_kube-system_findstr_aws-load-balancer.jpg',
-          imageCaption: 'AWS Load Balancer Controller — 2/2 pods Running',
+          imageCaption: 'AWS Load Balancer Controller: 2/2 pods Running',
           codeBlock: `kubectl get pods -n kube-system | findstr aws-load-balancer`,
         },
         {
@@ -392,7 +392,7 @@ helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-contro
             'All three ESO components, the main controller, the cert-controller, and the admission webhook, come up `Running` in the `external-secrets` namespace.',
           ],
           image: 'assets/img/artevier/external-secrets.jpg',
-          imageCaption: 'External Secrets Operator — all 3 pods Running',
+          imageCaption: 'External Secrets Operator: all 3 pods Running',
           codeBlock: `kubectl get pods -n external-secrets`,
         },
         {
@@ -457,14 +457,14 @@ kubectl get ingress -n artevier`,
           ],
           image: 'assets/img/artevier/succ_register.jpg',
           imageCaption:
-            'Registered and logged in on the live ALB — dashboard rendering correctly',
+            'Registered and logged in on the live ALB, dashboard rendering correctly',
         },
       ],
     },
     {
       key: 'autoscaling',
       label: 'Autoscaling',
-      pageTitle: 'Artevier – Autoscaling with Karpenter',
+      pageTitle: 'Artevier: Autoscaling with Karpenter',
       articleReadTime: '6 min read',
       articleBlocks: [
         {
@@ -540,7 +540,7 @@ Karpenter             Live, scaling 2 -> 3 nodes on demand`,
     {
       key: 'monitoring',
       label: 'Monitoring',
-      pageTitle: 'Artevier – Monitoring with Prometheus & Grafana',
+      pageTitle: 'Artevier: Monitoring with Prometheus & Grafana',
       articleReadTime: '4 min read',
       articleBlocks: [
         {
@@ -596,7 +596,7 @@ kubectl --namespace monitoring port-forward $POD_NAME 3000`,
     {
       key: 'live-testing',
       label: 'Live Testing',
-      pageTitle: 'Artevier – Live End-to-End Testing',
+      pageTitle: 'Artevier: Live End-to-End Testing',
       articleReadTime: '3 min read',
       articleBlocks: [
         {
@@ -623,8 +623,8 @@ kubectl --namespace monitoring port-forward $POD_NAME 3000`,
     },
 {
   key: 'cicd',
-  label: 'CI/CD – Jenkins',
-  pageTitle: 'Artevier – Jenkins Pipeline',
+  label: 'CI/CD: Jenkins',
+  pageTitle: 'Artevier: Jenkins Pipeline',
   articleReadTime: '6 min read',
   articleBlocks: [
     {

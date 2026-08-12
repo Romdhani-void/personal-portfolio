@@ -127,7 +127,7 @@
                 <!-- WIP button -->
                 <button *ngIf="p.isWip"
                         type="button"
-                        (click)="openWipModal()"
+                        (click)="openWipModal(p)"
                         class="inline-flex items-center gap-1 rounded-full wip-btn px-3 py-1 text-[11px] font-semibold">
                   Still on My Desk
                 </button>
@@ -177,11 +177,9 @@
         </svg>
       </button>
     </div>
-    <h3 id="wip-modal-title" class="modal-title">This project is still on my desk</h3>
+    <h3 id="wip-modal-title" class="modal-title">{{ selectedWipProject?.title }} is still on my desk</h3>
     <p class="modal-message">
-      Graph Me is actively in development — I'm building it out feature by feature.
-      Check back soon for the full release with live infrastructure visualization,
-      resource watching, and smart fix suggestions.
+      {{ selectedWipProject?.wipMessage || (selectedWipProject?.title) + ' is actively in development. Check back soon for the full release.' }}
     </p>
     <button type="button" class="modal-ok-btn" (click)="closeWipModal()">Got it</button>
   </div>

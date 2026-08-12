@@ -22,6 +22,7 @@ interface Project {
   videoLink?: string;
   n8n?: boolean; // optional automation badge
   isWip?: boolean; // work in progress flag
+  wipMessage?: string; // text shown in the "still on my desk" modal
 }
 
 @Component({
@@ -41,6 +42,7 @@ export class WorkComponent {
 
   active: Role = 'all';
   showWipModal = false;
+  selectedWipProject: Project | null = null;
 
   readonly projects: Project[] = [
     {
@@ -52,8 +54,7 @@ export class WorkComponent {
       scope: 'Public app + admin panel',
       duration: '8 weeks',
       link: 'https://github.com/Romdhani-void/safarica-app',
-      isExternal: true,
-      n8n: true
+      isExternal: true
     },
     {
       id: 'fs2',
@@ -62,9 +63,11 @@ export class WorkComponent {
       roles: ['fullstack'],
       tags: ['Angular', 'Node', 'Express', 'MongoDB'],
       scope: 'Booking + management platform',
-      duration: '6 weeks',
+      duration: 'Building as a SaaS',
       link: 'https://github.com/Romdhani-void/barbershop-booking',
-      isExternal: true
+      isExternal: true,
+      isWip: true,
+      wipMessage: 'BarberShop is being rebuilt as a multi-tenant SaaS platform, so any salon can sign up and run their own booking site. Check back soon for the full release.'
     },
     {
       id: 'fs3',
@@ -120,8 +123,7 @@ export class WorkComponent {
       tags: ['TypeScript', 'VS Code Extension', 'Graph Visualization'],
       scope: 'Developer tooling / infra visualization',
       link: '#',
-      isExternal: false,
-      isWip: true
+      isExternal: false
     },
     {
       id: 'ps1',
@@ -147,6 +149,12 @@ export class WorkComponent {
   isscripts(p: Project): boolean { return p.roles.includes('scripts'); }
   getPrimaryLink(p: Project): string | null { return p.link || p.blogLink || null; }
 
-  openWipModal() { this.showWipModal = true; }
-  closeWipModal() { this.showWipModal = false; }
+  openWipModal(p: Project) {
+    this.selectedWipProject = p;
+    this.showWipModal = true;
+  }
+  closeWipModal() {
+    this.showWipModal = false;
+    this.selectedWipProject = null;
+  }
 }
