@@ -123,7 +123,9 @@ export class WorkComponent {
       tags: ['TypeScript', 'VS Code Extension', 'Graph Visualization'],
       scope: 'Developer tooling / infra visualization',
       link: '#',
-      isExternal: false
+      isExternal: false,
+      isWip: true,
+      wipMessage: 'Graph Me is actively in development. I\'m building it out feature by feature. Check back soon for the full release with live infrastructure visualization, resource watching, and smart fix suggestions.'
     },
     {
       id: 'ps1',
