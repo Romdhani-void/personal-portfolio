@@ -82,7 +82,7 @@
           </div>
 
           <div class="mt-8 flex items-center gap-4">
-            <a href="assets/docs/Romdhani-Resume.pdf" download="Romdhani-Resume.pdf" class="cta-primary">Download Resume</a>
+            <a href="assets/docs/Romdhani_resume_2026.pdf" download="Romdhani_resume_2026.pdf" class="cta-primary">Download Resume</a>
             <a routerLink="/work" class="cta-outline">View My Work</a>
           </div>
         </div>
