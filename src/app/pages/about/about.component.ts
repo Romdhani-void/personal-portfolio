@@ -28,7 +28,7 @@ export class AboutComponent {
   gradYear = 2025;
   location = 'Hungary';
   currentEmployer = 'Tata Consultancy Services';
-  linkedin = 'romdhani';
+  linkedin = 'romdhani-mohamed-ali-5389aa183';
 
   careerGoal = 'Targeting AWS DevOps Engineer';
 
